@@ -162,3 +162,69 @@
     animation: none;
   }
 }
+
+/* Origin / Destination tags above the map pins (an HTML overlay in the map) */
+.tj-pinlabel {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 58px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 190px;
+  padding: 6px 11px 7px;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(17, 25, 78, 0.22);
+  font-family: 'Public Sans', Arial, sans-serif;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.tj-pinlabel::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  margin-left: -6px;
+  border: 6px solid transparent;
+  border-bottom: 0;
+  border-top-color: #fff;
+}
+.tj-pinlabel small {
+  margin-bottom: 2px;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.tj-pinlabel--origin small {
+  color: #11194e;
+}
+.tj-pinlabel--destination small {
+  color: #fe000b;
+}
+.tj-pinlabel strong {
+  max-width: 168px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #11194e;
+}
+.tj-pinlabel--origin {
+  border-top: 3px solid #11194e;
+}
+.tj-pinlabel--destination {
+  border-top: 3px solid #fe000b;
+}
+@media (max-width: 520px) {
+  .tj-pinlabel {
+    max-width: 130px;
+    padding: 5px 8px 6px;
+  }
+  .tj-pinlabel strong {
+    max-width: 114px;
+    font-size: 11px;
+  }
+}

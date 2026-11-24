@@ -64,15 +64,49 @@ const packageIcon = (google, kind, color = '#FE000B') =>
     48
   );
 
-const pointIcon = (google, color, letter) =>
-  svgIcon(
-    google,
-    `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
-      <circle cx="15" cy="15" r="12.5" fill="${color}" stroke="#fff" stroke-width="2.5"/>
-      <text x="15" y="19.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">${letter}</text>
-    </svg>`,
-    30
-  );
+// Origin and destination pins: a map pin (tip on the exact spot) with a
+// warehouse for the origin and a finish flag for the destination.
+const PIN_GLYPHS = {
+  origin: '<path d="M3 10.5 12 5l9 5.5V20H3z"/><path d="M8 20v-5h8v5M8 12.5h8"/>',
+  destination: '<path d="M6 21V4"/><path d="M6 4h11l-2.5 4L17 12H6"/>',
+};
+const pinIcon = (google, color, kind) => ({
+  url:
+    'data:image/svg+xml;charset=UTF-8,' +
+    encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="52" viewBox="0 0 40 52">
+        <path d="M20 50s16-15.2 16-29A16 16 0 0 0 4 21c0 13.8 16 29 16 29z" fill="${color}" stroke="#fff" stroke-width="2.5"/>
+        <circle cx="20" cy="21" r="11" fill="#fff" fill-opacity=".16"/>
+        <g transform="translate(10 11) scale(.84)" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">${PIN_GLYPHS[kind]}</g>
+      </svg>`
+    ),
+  scaledSize: new google.maps.Size(40, 52),
+  anchor: new google.maps.Point(20, 50),
+});
+
+/** A small "ORIGIN / Houston, TX" tag floating above a pin (HTML overlay). */
+function pinLabel(google, map, position, role, place) {
+  const overlay = new google.maps.OverlayView();
+  const el = document.createElement('div');
+  el.className = `tj-pinlabel tj-pinlabel--${role}`;
+  const small = document.createElement('small');
+  small.textContent = role === 'origin' ? 'Origin' : 'Destination';
+  const strong = document.createElement('strong');
+  strong.textContent = place || '';
+  el.append(small, strong);
+  overlay.onAdd = function onAdd() {
+    this.getPanes().floatPane.appendChild(el);
+  };
+  overlay.draw = function draw() {
+    const p = this.getProjection()?.fromLatLngToDivPixel(position);
+    if (!p) return;
+    el.style.left = `${p.x}px`;
+    el.style.top = `${p.y}px`;
+  };
+  overlay.onRemove = () => el.remove();
+  overlay.setMap(map);
+  return overlay;
+}
 
 function buildPath(google, s) {
   if (s.routePolyline) {
@@ -208,7 +242,8 @@ export default function ShipmentMap({ shipment: saved, apiKey, clockOffsetMs = 0
         mapRef.current = map;
         const bounds = new google.maps.LatLngBounds();
         path.forEach((p) => bounds.extend(p));
-        map.fitBounds(bounds, 56);
+        // extra room at the top for the Origin / Destination labels above the pins
+        map.fitBounds(bounds, { top: 96, right: 70, bottom: 36, left: 70 });
 
         const remaining = new google.maps.Polyline({
           map,
@@ -218,8 +253,16 @@ export default function ShipmentMap({ shipment: saved, apiKey, clockOffsetMs = 0
           icons: [{ icon: { path: 'M 0,-1 0,1', strokeOpacity: 0.85, strokeColor: '#7d8299', scale: 3 }, offset: '0', repeat: '13px' }],
         });
         const covered = new google.maps.Polyline({ map, path: [], geodesic, strokeColor: '#11194E', strokeOpacity: 1, strokeWeight: 5 });
-        const start = new google.maps.Marker({ map, position: path[0], icon: pointIcon(google, '#11194E', 'A'), title: s.origin, zIndex: 2 });
-        const end = new google.maps.Marker({ map, position: path[path.length - 1], icon: pointIcon(google, '#FE000B', 'B'), title: s.destination, zIndex: 2 });
+        const start = new google.maps.Marker({ map, position: path[0], icon: pinIcon(google, '#11194E', 'origin'), title: `Origin: ${s.origin}`, zIndex: 3 });
+        const end = new google.maps.Marker({
+          map,
+          position: path[path.length - 1],
+          icon: pinIcon(google, '#FE000B', 'destination'),
+          title: `Destination: ${s.destination}`,
+          zIndex: 3,
+        });
+        const startLabel = pinLabel(google, map, path[0], 'origin', s.origin);
+        const endLabel = pinLabel(google, map, path[path.length - 1], 'destination', s.destination);
         const pkg = new google.maps.Marker({
           map,
           position: path[0],
@@ -227,7 +270,7 @@ export default function ShipmentMap({ shipment: saved, apiKey, clockOffsetMs = 0
           title: 'Your package',
           zIndex: 10,
         });
-        overlays = [remaining, covered, start, end, pkg];
+        overlays = [remaining, covered, start, end, startLabel, endLabel, pkg];
         const vehicle = VEHICLE_BY_FREIGHT[s.freightType] || 'truck';
         let shownState = '';
 
