@@ -148,7 +148,7 @@ export default function TrackPage() {
     else setCode(next);
   };
 
-  const phone = settings?.companyPhone || '+1800 668 333';
+  const phone = settings?.companyPhone || '+1 (904) 567-6548';
 
   return (
     <div id="pxl-main" className="tjt tjt-page">

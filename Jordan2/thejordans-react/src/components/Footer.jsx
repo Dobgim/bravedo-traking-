@@ -326,7 +326,7 @@ export default function Footer() {
                       <div className="pxl-text-editor underline ">
                         <div className="pxl-item--inner  " data-wow-delay="ms">
                           <p>
-                            <a href="tel:+1800668333">{"+1800 – 668 333 "}</a>
+                            <a href="tel:+19045676548">{"+1 (904) 567-6548 "}</a>
                           </p>
                         </div>
                       </div>

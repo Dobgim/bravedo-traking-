@@ -374,7 +374,7 @@ export default function RequestQuote() {
                     </svg>
                   </a>
                   {" "}
-                  <span className="pxl-icon-label">+1800 - 668 333 support@worldbridgexpress.com</span>
+                  <span className="pxl-icon-label">+1 (904) 567-6548 support@worldbridgexpress.com</span>
                 </div>
               </div>
             </div>

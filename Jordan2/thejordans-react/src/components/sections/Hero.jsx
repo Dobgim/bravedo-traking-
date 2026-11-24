@@ -30,7 +30,7 @@ export default function Hero() {
               <div className="elementor-widget-container">
                 <div className="pxl-text-editor default ">
                   <div className="pxl-item--inner  " data-wow-delay="ms">
-                    <p>Support: +1800 – 668 333</p>
+                    <p>Support: +1 (904) 567-6548</p>
                   </div>
                 </div>
               </div>
