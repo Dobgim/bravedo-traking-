@@ -414,3 +414,19 @@
     padding-right: 22px;
   }
 }
+
+/* barcode of the tracking number, under the QR text */
+.inv-barcode {
+  margin-top: 10px;
+}
+.inv-barcode img {
+  display: block;
+  width: 210px;
+  height: 46px;
+}
+.inv-barcode span {
+  display: block;
+  margin-top: 3px;
+  font: 600 11px/1 ui-monospace, Menlo, Consolas, monospace;
+  letter-spacing: 0.2em;
+}

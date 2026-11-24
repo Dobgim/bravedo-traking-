@@ -31,6 +31,9 @@ async function rpc(fn, args) {
 /** Shipment for a tracking number, or null when unknown. */
 export const trackShipment = (code) => rpc('track_shipment', { p_code: code });
 
+/** Invoice charges for a tracking number (items, tax, payments), or null. */
+export const getShipmentInvoice = (code) => rpc('shipment_invoice', { p_code: code });
+
 export const submitQuote = (quote) => rpc('submit_quote', { p: quote });
 
 /** Resolves to 'subscribed' or 'exists'. */

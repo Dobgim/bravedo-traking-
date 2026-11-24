@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import QRCode from 'qrcode';
+import JsBarcode from 'jsbarcode';
 import { getSettings, getShipment } from '../data.js';
 import { computeInvoice, formatMoney } from '../invoice.js';
 import { Icon, formatDate } from '../ui.jsx';
@@ -12,6 +13,7 @@ export default function Invoice() {
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
   const [qr, setQr] = useState('');
+  const [barcode, setBarcode] = useState('');
 
   useEffect(() => {
     let active = true;
@@ -42,6 +44,14 @@ export default function Invoice() {
     })
       .then(setQr)
       .catch(() => setQr(''));
+    // Code 128 barcode of the tracking number (scannable at depots)
+    try {
+      const canvas = document.createElement('canvas');
+      JsBarcode(canvas, data.shipment.trackingNumber, { format: 'CODE128', width: 2, height: 64, margin: 0, displayValue: false, lineColor: '#11194E' });
+      setBarcode(canvas.toDataURL('image/png'));
+    } catch {
+      setBarcode('');
+    }
   }, [trackUrl]);
 
   useEffect(() => {
@@ -215,6 +225,12 @@ export default function Invoice() {
                 <strong>Scan to track your shipment</strong>
                 <p>Point your phone camera at the code to follow {s.trackingNumber} live on the map.</p>
                 <code>{trackUrl}</code>
+                {barcode && (
+                  <div className="inv-barcode">
+                    <img src={barcode} alt={`Barcode ${s.trackingNumber}`} />
+                    <span>{s.trackingNumber}</span>
+                  </div>
+                )}
               </div>
             </div>
 

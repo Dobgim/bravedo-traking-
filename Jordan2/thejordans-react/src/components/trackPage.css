@@ -554,3 +554,13 @@
     animation-duration: 2s;
   }
 }
+
+/* the invoice card under the tracking result */
+.tjt .tjt-invoice {
+  margin-top: 28px;
+  background: #f7f8fb;
+  scroll-margin-top: 110px;
+}
+.tjt .tjt-invoice .tjt-card__head {
+  margin-bottom: 18px;
+}

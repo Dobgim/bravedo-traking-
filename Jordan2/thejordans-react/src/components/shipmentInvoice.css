@@ -1,0 +1,556 @@
+/* Public shipment invoice (ShipmentInvoice.jsx). Scoped under .wbi-*.
+   Phones get a stacked layout; the PDF copy (.wbi--pdf) always uses the
+   desktop A4 layout, so the small-screen rules exclude it. */
+
+.wbi-wrap {
+  font-family: 'Public Sans', sans-serif;
+  color: #11194e;
+}
+.wbi-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.wbi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 1px solid #d9dce8;
+  border-radius: 8px;
+  background: #fff;
+  color: #11194e;
+  font: 700 15px 'Public Sans', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.wbi-btn:hover {
+  background: #f3f4f9;
+}
+.wbi-btn--primary {
+  border-color: #fe000b;
+  background: #fe000b;
+  color: #fff;
+}
+.wbi-btn--primary:hover {
+  background: #d10009;
+}
+.wbi-btn:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+.wbi-error {
+  margin: -6px 0 16px;
+  color: #c2000a;
+  font-size: 14px;
+}
+.wbi-scroll {
+  overflow-x: auto;
+}
+
+/* ---------- the sheet ---------- */
+.wbi {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #e3e5ee;
+  border-radius: 6px;
+  box-shadow: 0 14px 40px rgba(17, 25, 78, 0.08);
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #11194e;
+}
+.wbi::before {
+  content: '';
+  display: block;
+  height: 8px;
+  background: linear-gradient(90deg, #11194e 0 70%, #fe000b 70% 100%);
+}
+.wbi--pdf {
+  width: 860px;
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.wbi-label {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #8a8fa6;
+}
+.wbi p {
+  margin: 0;
+}
+
+.wbi-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 34px 44px 26px;
+}
+.wbi-brand img {
+  display: block;
+  width: 230px;
+  height: auto;
+  margin-bottom: 12px;
+}
+.wbi-brand__lines {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  color: #5b6078;
+}
+.wbi-title {
+  text-align: right;
+}
+.wbi-title h2 {
+  margin: 0 0 14px;
+  font-family: 'Geologica', sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #11194e;
+}
+.wbi-title dl {
+  margin: 0 0 12px;
+}
+.wbi-title dl div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  font-size: 13.5px;
+}
+.wbi-title dt {
+  color: #8a8fa6;
+}
+.wbi-title dd {
+  margin: 0;
+  min-width: 120px;
+  font-weight: 700;
+}
+.wbi-pay {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #ffe6e7;
+  color: #c2000a;
+}
+.wbi-pay--paid {
+  background: #e2f5eb;
+  color: #0f7b4b;
+}
+.wbi-pay--partially-paid {
+  background: #fff1d9;
+  color: #9a5800;
+}
+
+.wbi-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 44px;
+  padding: 18px 24px;
+  border-radius: 10px;
+  background: #11194e;
+  color: #fff;
+}
+.wbi-track .wbi-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+.wbi-track__code strong {
+  display: block;
+  margin-bottom: 8px;
+  font-family: 'Geologica', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.04em;
+}
+.wbi-status {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 12px;
+  font-weight: 700;
+}
+.wbi-status--delivered {
+  background: #16a34a;
+}
+.wbi-status--on-hold,
+.wbi-status--delayed {
+  background: #d97706;
+}
+.wbi-status--cancelled {
+  background: #c2000a;
+}
+.wbi-barcode {
+  flex-shrink: 0;
+  padding: 10px 14px 6px;
+  border-radius: 6px;
+  background: #fff;
+  text-align: center;
+}
+.wbi-barcode img {
+  display: block;
+  width: 250px;
+  height: 58px;
+}
+.wbi-barcode span {
+  display: block;
+  margin-top: 3px;
+  font: 600 12px/1 ui-monospace, Menlo, Consolas, monospace;
+  letter-spacing: 0.2em;
+  color: #11194e;
+}
+
+.wbi-parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 28px 44px 6px;
+}
+.wbi-party {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px;
+  border: 1px solid #e3e5ee;
+  border-radius: 10px;
+}
+.wbi-party strong {
+  margin-bottom: 4px;
+  font-size: 15.5px;
+}
+.wbi-party span {
+  font-size: 13.5px;
+  color: #5b6078;
+  overflow-wrap: anywhere;
+}
+
+.wbi-route {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 20px 44px 0;
+  padding: 16px 22px;
+  border-radius: 10px;
+  background: #f3f4f9;
+}
+.wbi-route strong {
+  font-size: 15px;
+}
+.wbi-route__line {
+  position: relative;
+  flex: 1;
+  min-width: 40px;
+  border-top: 2px dashed #b8bdd3;
+}
+.wbi-route__line i {
+  position: absolute;
+  right: -2px;
+  top: -7px;
+  border: 6px solid transparent;
+  border-left: 9px solid #fe000b;
+}
+.wbi-route__end {
+  text-align: right;
+}
+
+.wbi-details {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px 20px;
+  margin: 0;
+  padding: 22px 44px 4px;
+}
+.wbi-details dt {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8fa6;
+}
+.wbi-details dd {
+  margin: 2px 0 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.wbi-table {
+  width: calc(100% - 88px);
+  margin: 26px 44px 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.wbi-table th {
+  padding: 12px 14px;
+  background: #11194e;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.wbi-table th:first-child {
+  border-radius: 8px 0 0 8px;
+}
+.wbi-table th:last-child {
+  border-radius: 0 8px 8px 0;
+}
+.wbi-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #eceef4;
+}
+.wbi-num {
+  width: 44px;
+  color: #8a8fa6;
+}
+.wbi-right {
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.wbi-totals {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 44px 0;
+}
+.wbi-totals dl {
+  width: 320px;
+  margin: 0;
+}
+.wbi-totals dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 4px;
+  border-bottom: 1px solid #eceef4;
+}
+.wbi-totals dt {
+  color: #5b6078;
+}
+.wbi-totals dd {
+  margin: 0;
+  font-weight: 700;
+}
+.wbi-totals .wbi-totals__grand {
+  margin: 6px 0;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #11194e;
+  color: #fff;
+  font-size: 17px;
+}
+.wbi-totals .wbi-totals__grand dt {
+  color: #fff;
+  font-weight: 700;
+}
+.wbi-totals__due dt {
+  color: #11194e !important;
+  font-weight: 700;
+}
+.wbi-totals__due dd {
+  color: #c2000a;
+  font-size: 16px;
+}
+
+.wbi-bottom {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 24px;
+  padding: 28px 44px 30px;
+}
+.wbi-qr {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px;
+  border: 1.5px dashed #c9cde0;
+  border-radius: 10px;
+}
+.wbi-qr img,
+.wbi-qr__ph {
+  flex-shrink: 0;
+  width: 124px;
+  height: 124px;
+}
+.wbi-qr__ph {
+  background: #f3f4f9;
+}
+.wbi-qr strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+.wbi-qr p {
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #5b6078;
+}
+.wbi-qr code {
+  display: block;
+  font: 11.5px/1.4 ui-monospace, Menlo, Consolas, monospace;
+  color: #11194e;
+  word-break: break-all;
+  background: none;
+  padding: 0;
+}
+.wbi-notes p {
+  font-size: 13.5px;
+  color: #5b6078;
+}
+.wbi-notes p + .wbi-label {
+  margin-top: 14px;
+}
+
+.wbi-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 44px;
+  border-top: 4px solid #fe000b;
+  background: #f3f4f9;
+  font-size: 13px;
+  color: #5b6078;
+}
+
+/* ---------- phones (not the PDF copy) ---------- */
+@media (max-width: 720px) {
+  .wbi:not(.wbi--pdf) .wbi-head,
+  .wbi:not(.wbi--pdf) .wbi-track,
+  .wbi:not(.wbi--pdf) .wbi-foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .wbi:not(.wbi--pdf) .wbi-head {
+    padding: 26px 20px 18px;
+  }
+  .wbi:not(.wbi--pdf) .wbi-title {
+    text-align: left;
+  }
+  .wbi:not(.wbi--pdf) .wbi-title dl div {
+    justify-content: flex-start;
+  }
+  .wbi:not(.wbi--pdf) .wbi-track,
+  .wbi:not(.wbi--pdf) .wbi-route {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .wbi:not(.wbi--pdf) .wbi-barcode,
+  .wbi:not(.wbi--pdf) .wbi-barcode img {
+    width: 100%;
+    max-width: 280px;
+    box-sizing: border-box;
+  }
+  .wbi:not(.wbi--pdf) .wbi-parties,
+  .wbi:not(.wbi--pdf) .wbi-bottom {
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .wbi:not(.wbi--pdf) .wbi-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .wbi:not(.wbi--pdf) .wbi-table {
+    width: calc(100% - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 13px;
+  }
+  .wbi:not(.wbi--pdf) .wbi-table th,
+  .wbi:not(.wbi--pdf) .wbi-table td {
+    padding: 10px 8px;
+  }
+  .wbi:not(.wbi--pdf) .wbi-table .wbi-num,
+  .wbi:not(.wbi--pdf) .wbi-table th:nth-child(4),
+  .wbi:not(.wbi--pdf) .wbi-table td:nth-child(4) {
+    display: none;
+  }
+  .wbi:not(.wbi--pdf) .wbi-table th:nth-child(2) {
+    border-radius: 8px 0 0 8px;
+  }
+  .wbi:not(.wbi--pdf) .wbi-totals {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .wbi:not(.wbi--pdf) .wbi-totals dl {
+    width: 100%;
+  }
+  .wbi:not(.wbi--pdf) .wbi-qr {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .wbi:not(.wbi--pdf) .wbi-foot {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* The website theme styles every table cell (borders, padding) and every
+   <dt>; reset those inside the invoice. */
+.wbi .wbi-table,
+.wbi .wbi-table th,
+.wbi .wbi-table td {
+  border: 0;
+  outline: 0;
+}
+.wbi .wbi-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid #eceef4;
+  font-size: 14px;
+  line-height: 1.4;
+  vertical-align: middle;
+  color: #11194e;
+  background: transparent;
+}
+.wbi .wbi-table tbody tr:nth-child(even) td {
+  background: #fafbfd;
+}
+.wbi .wbi-totals dt,
+.wbi .wbi-title dt {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+.wbi .wbi-totals .wbi-totals__grand dt,
+.wbi .wbi-totals__due dt {
+  font-weight: 700;
+}
+
+/* the PDF copy: a little tighter so a normal invoice fits one A4 page */
+.wbi--pdf .wbi-head {
+  padding-top: 28px;
+  padding-bottom: 20px;
+}
+.wbi--pdf .wbi-parties {
+  padding-top: 22px;
+}
+.wbi--pdf .wbi-details {
+  padding-top: 18px;
+}
+.wbi--pdf .wbi-table {
+  margin-top: 20px;
+}
+.wbi--pdf .wbi-bottom {
+  padding-top: 22px;
+  padding-bottom: 24px;
+}
+.wbi .wbi-table th {
+  border: 0 !important;
+  box-shadow: none !important;
+}

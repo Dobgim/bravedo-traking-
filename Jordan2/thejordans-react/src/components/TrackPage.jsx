@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ShipmentResult, { formatDate } from './ShipmentResult.jsx';
-import { getPublicSettings, trackShipment } from '../lib/publicApi.js';
+import { getPublicSettings, getShipmentInvoice, trackShipment } from '../lib/publicApi.js';
+import ShipmentInvoice from './ShipmentInvoice.jsx';
 import './trackPage.css';
 
 /*
@@ -55,6 +56,7 @@ export default function TrackPage() {
   const [state, setState] = useState({});
   const [clockOffset, setClockOffset] = useState(0);
   const [settings, setSettings] = useState(null);
+  const [invoice, setInvoice] = useState(null);
   const resultRef = useRef(null);
   const searched = useRef(false);
 
@@ -117,6 +119,19 @@ export default function TrackPage() {
   }, [load, code]);
 
   const found = state.shipment?.trackingNumber;
+
+  // the invoice's charges, once per tracking number (not on every refresh)
+  useEffect(() => {
+    setInvoice(null);
+    if (!found) return undefined;
+    let active = true;
+    getShipmentInvoice(found)
+      .then((inv) => active && setInvoice(inv || {}))
+      .catch(() => active && setInvoice({}));
+    return () => {
+      active = false;
+    };
+  }, [found]);
   useEffect(() => {
     if (searched.current && (found || state.notFound)) {
       resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -225,6 +240,19 @@ export default function TrackPage() {
             </header>
             <ShipmentResult shipment={state.shipment} mapsKey={settings ? settings.googleMapsApiKey || '' : null} clockOffset={clockOffset} />
           </article>
+        )}
+
+        {state.shipment && invoice && (
+          <section className="tjt-card tjt-invoice" id="invoice" aria-label="Invoice">
+            <header className="tjt-card__head">
+              <div>
+                <span className="tjt-label">Invoice</span>
+                <h2>Your shipment invoice</h2>
+              </div>
+              <span className="tjt-muted">With a QR code and barcode for {state.shipment.trackingNumber} · download it as a PDF</span>
+            </header>
+            <ShipmentInvoice shipment={state.shipment} invoice={invoice} company={settings || {}} />
+          </section>
         )}
       </section>
     </div>
