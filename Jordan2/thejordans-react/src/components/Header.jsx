@@ -1353,6 +1353,11 @@ export default function Header() {
                           <span>Contact Us</span>
                         </a>
                       </li>
+                      <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-account">
+                        <a href="/account">
+                          <span>My Account / Sign In</span>
+                        </a>
+                      </li>
                     </ul>
                   </nav>
                 </div>
