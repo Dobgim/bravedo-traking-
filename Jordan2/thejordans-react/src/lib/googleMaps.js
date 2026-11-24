@@ -1,8 +1,14 @@
+import { GOOGLE_MAPS_API_KEY } from './config.js';
+
 let loading = null;
 let authFailed = false;
 
-/** Loads the Google Maps JS API (with the geometry library) once per page. */
-export function loadGoogleMaps(apiKey) {
+/**
+ * Loads the Google Maps JS API (with the geometry library) once per page.
+ * Uses the key saved in Admin → Settings, or VITE_GOOGLE_MAPS_API_KEY.
+ */
+export function loadGoogleMaps(savedKey) {
+  const apiKey = (savedKey || '').trim() || GOOGLE_MAPS_API_KEY;
   if (window.google?.maps?.geometry) return Promise.resolve(window.google);
   if (authFailed) return Promise.reject(new Error('Google Maps rejected the API key. Check it in Admin → Settings.'));
   if (loading) return loading;

@@ -37,7 +37,7 @@ export default function Footer() {
                   >
                     <div className="elementor-widget-container">
                       <div className="pxl-logo " data-wow-delay="ms">
-                        <img src="/uploads/2026/02/logo-light.webp" className="attachment-full" alt="" />
+                        <img loading="lazy" decoding="async" src="/uploads/2026/02/logo-light.webp" className="attachment-full" alt="" />
                       </div>
                     </div>
                   </div>
@@ -469,7 +469,7 @@ export default function Footer() {
                       >
                         <div className="pxl-item--inner" data-wow-delay="120ms">
                           <div className="pxl-item--image " data-parallax-value="">
-                            <img width="4" height="4" src="/uploads/2026/02/ddd.svg" className="no-lazyload attachment-full" alt="" />
+                            <img loading="lazy" decoding="async" width="4" height="4" src="/uploads/2026/02/ddd.svg" className="no-lazyload attachment-full" alt="" />
                           </div>
                         </div>
                       </div>
@@ -507,7 +507,7 @@ export default function Footer() {
                       >
                         <div className="pxl-item--inner" data-wow-delay="120ms">
                           <div className="pxl-item--image " data-parallax-value="">
-                            <img width="4" height="4" src="/uploads/2026/02/ddd.svg" className="no-lazyload attachment-full" alt="" />
+                            <img loading="lazy" decoding="async" width="4" height="4" src="/uploads/2026/02/ddd.svg" className="no-lazyload attachment-full" alt="" />
                           </div>
                         </div>
                       </div>

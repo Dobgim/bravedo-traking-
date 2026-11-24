@@ -33,6 +33,7 @@ export default function useLegacyScripts() {
         el.async = false;
         el.dataset.legacy = 'true';
         el.addEventListener('load', () => {
+          // (async=false scripts fire load right after each one executes)
           // runs synchronously after jQuery executes - before its queued ready
           if (window.jQuery && !readyHeld) {
             window.jQuery.holdReady(true);
@@ -54,10 +55,14 @@ export default function useLegacyScripts() {
     };
 
     (async () => {
-      for (const src of LEGACY_SCRIPTS) {
-        if (cancelled) return;
-        await loadScript(src);
-      }
+      // jQuery first, so ready can be held before anything registers with it.
+      // Then every other script is requested at once: async=false scripts
+      // download in parallel but still execute in insertion order, so the
+      // original document order is kept without a 70-request waterfall.
+      const [first, ...rest] = LEGACY_SCRIPTS;
+      await loadScript(first);
+      if (cancelled) return;
+      await Promise.all(rest.map(loadScript));
       if (cancelled) return;
 
       // plain-JS libraries waiting for DOMContentLoaded (reaches window too)

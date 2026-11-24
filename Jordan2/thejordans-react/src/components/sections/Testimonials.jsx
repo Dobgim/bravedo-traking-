@@ -68,7 +68,7 @@ export default function Testimonials() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/llklklk.png" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/llklklk.png" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default function Testimonials() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/sss-1.png" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/sss-1.png" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default function Testimonials() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/ggggg-1.png" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/ggggg-1.png" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function Testimonials() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/ggggg-1.png" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/ggggg-1.png" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -293,7 +293,7 @@ export default function Testimonials() {
                             </p>
                             <div className="author">
                               <div className="pxl-item--quote">
-                                <img decoding="async" src="/uploads/2026/03/quote-icon.png" className="no-lazyload attachment-full" alt="" />
+                                <img loading="lazy" decoding="async" src="/uploads/2026/03/quote-icon.png" className="no-lazyload attachment-full" alt="" />
                               </div>
                               <h5 className="pxl-item--title">{" Lucas Chang "}</h5>
                               <span className="pxl-item--position">Operations Manager</span>
@@ -310,7 +310,7 @@ export default function Testimonials() {
                             </p>
                             <div className="author">
                               <div className="pxl-item--quote">
-                                <img decoding="async" src="/uploads/2026/03/quote-icon.png" className="no-lazyload attachment-full" alt="" />
+                                <img loading="lazy" decoding="async" src="/uploads/2026/03/quote-icon.png" className="no-lazyload attachment-full" alt="" />
                               </div>
                               <h5 className="pxl-item--title">{" Laura Julian "}</h5>
                               <span className="pxl-item--position">E-commerce Director</span>

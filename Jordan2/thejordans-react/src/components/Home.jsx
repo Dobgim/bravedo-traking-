@@ -1,3 +1,5 @@
+import { useLayoutEffect, useRef } from 'react';
+import { deferBackgrounds } from '../lazyBackgrounds.js';
 import Hero from './sections/Hero.jsx';
 import TrackShipment from './sections/TrackShipment.jsx';
 import GetStarted from './sections/GetStarted.jsx';
@@ -19,8 +21,12 @@ import Insights from './sections/Insights.jsx';
 import Faq from './sections/Faq.jsx';
 
 export default function Home() {
+  const mainRef = useRef(null);
+  // before paint, and before the theme scripts (App's effect) start
+  useLayoutEffect(() => deferBackgrounds(mainRef.current), []);
+
   return (
-    <div id="pxl-main">
+    <div id="pxl-main" ref={mainRef}>
       <div className="elementor-container">
         <div className="row pxl-content-wrap no-sidebar">
           <div id="pxl-content-area" className="pxl-content-area pxl-content-page col-12">

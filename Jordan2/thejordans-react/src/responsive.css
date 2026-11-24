@@ -71,3 +71,31 @@ body {
     height: 24px;
   }
 }
+
+/* Stats strip under the hero ("120+ Countries", "10M+ Shipments", ...): the
+   items sit side by side with a 65px icon and 40px padding, which clips the
+   text on phones. Stack them with a smaller icon instead. */
+@media (max-width: 575px) {
+  body .elementor-18 .elementor-element.elementor-element-834e86d {
+    --flex-direction: column;
+    --align-items: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  body .elementor-18 .elementor-element.elementor-element-834e86d > .elementor-widget {
+    width: calc(100% - 30px) !important;
+    max-width: calc(100% - 30px) !important;
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+  }
+  body .elementor-18 .elementor-element.elementor-element-834e86d > .elementor-widget > .elementor-widget-container {
+    padding: 0 !important;
+  }
+  body .elementor-18 .elementor-element.elementor-element-834e86d .pxl-icon-box .pxl-item--icon {
+    min-width: 52px !important;
+    width: 52px !important;
+    min-height: 52px !important;
+    height: 52px !important;
+  }
+}

@@ -289,7 +289,7 @@ export default function RequestQuote() {
                 >
                   <div className="pxl-item--inner" data-wow-delay="120ms">
                     <div className="pxl-item--image " data-parallax-value="">
-                      <img decoding="async" src="/uploads/2026/02/ard.png" className="no-lazyload attachment-full" alt="" />
+                      <img loading="lazy" decoding="async" src="/uploads/2026/02/ard.png" className="no-lazyload attachment-full" alt="" />
                     </div>
                   </div>
                 </div>

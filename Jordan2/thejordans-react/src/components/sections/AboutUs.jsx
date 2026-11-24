@@ -34,7 +34,7 @@ export default function AboutUs() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/h4-4.webp" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/h4-4.webp" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -55,7 +55,7 @@ export default function AboutUs() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/h4-5.webp" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/h4-5.webp" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -76,7 +76,7 @@ export default function AboutUs() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/h4-6-1.webp" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/h4-6-1.webp" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -104,7 +104,7 @@ export default function AboutUs() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/h4-7-1.webp" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/h4-7-1.webp" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>

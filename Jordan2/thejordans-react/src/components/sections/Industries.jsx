@@ -54,7 +54,7 @@ export default function Industries() {
                   <div className="pxl-swiper-slide  wow" data-wow-duration="1.2s">
                     <div className="pxl-post--inner">
                       <div className="pxl-post--icon">
-                        <img decoding="async" width="39" height="27" src="/uploads/2026/02/id1.svg" className="attachment-full" alt="" />
+                        <img loading="lazy" decoding="async" width="39" height="27" src="/uploads/2026/02/id1.svg" className="attachment-full" alt="" />
                       </div>
                       <h3 className="pxl-post--title">
                         <a href="https://demo6.atlascargotransit.com/our-services">Fashion &amp; Apparel</a>
@@ -67,7 +67,7 @@ export default function Industries() {
                   <div className="pxl-swiper-slide  wow" data-wow-duration="1.2s">
                     <div className="pxl-post--inner">
                       <div className="pxl-post--icon">
-                        <img decoding="async" width="38" height="34" src="/uploads/2026/02/id3.svg" className="attachment-full" alt="" />
+                        <img loading="lazy" decoding="async" width="38" height="34" src="/uploads/2026/02/id3.svg" className="attachment-full" alt="" />
                       </div>
                       <h3 className="pxl-post--title">
                         <a href="https://demo6.atlascargotransit.com/our-services">Fresh Produce &amp; Agriculture</a>
@@ -80,7 +80,7 @@ export default function Industries() {
                   <div className="pxl-swiper-slide  wow" data-wow-duration="1.2s">
                     <div className="pxl-post--inner">
                       <div className="pxl-post--icon">
-                        <img decoding="async" width="31" height="36" src="/uploads/2026/02/id4.svg" className="attachment-full" alt="" />
+                        <img loading="lazy" decoding="async" width="31" height="36" src="/uploads/2026/02/id4.svg" className="attachment-full" alt="" />
                       </div>
                       <h3 className="pxl-post--title">
                         <a href="https://demo6.atlascargotransit.com/our-services">Healthcare &amp; Pharmaceuticals</a>
@@ -93,7 +93,7 @@ export default function Industries() {
                   <div className="pxl-swiper-slide  wow" data-wow-duration="1.2s">
                     <div className="pxl-post--inner">
                       <div className="pxl-post--icon">
-                        <img decoding="async" width="30" height="30" src="/uploads/2026/02/id2.svg" className="attachment-full" alt="" />
+                        <img loading="lazy" decoding="async" width="30" height="30" src="/uploads/2026/02/id2.svg" className="attachment-full" alt="" />
                       </div>
                       <h3 className="pxl-post--title">
                         <a href="https://demo6.atlascargotransit.com/our-services">Electronics &amp; Technology</a>

@@ -28,7 +28,7 @@ export default function Partners() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/cl2.webp" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/cl2.webp" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -56,7 +56,7 @@ export default function Partners() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/cl3.webp" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/cl3.webp" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -127,7 +127,7 @@ export default function Partners() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/cll8.webp" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/cll8.webp" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function Partners() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/cl9.webp" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/cl9.webp" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -183,7 +183,7 @@ export default function Partners() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/cl10.webp" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/cl10.webp" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>
@@ -211,7 +211,7 @@ export default function Partners() {
               >
                 <div className="pxl-item--inner" data-wow-delay="120ms">
                   <div className="pxl-item--image " data-parallax-value="">
-                    <img decoding="async" src="/uploads/2026/03/cl11.webp" className="no-lazyload attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/cl11.webp" className="no-lazyload attachment-full" alt="" />
                   </div>
                 </div>
               </div>

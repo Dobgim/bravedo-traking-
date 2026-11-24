@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { loadGoogleMaps } from '../lib/googleMaps.js';
+import { locateRoute } from '../admin/route.js';
 import {
   arrivalMs,
   coveredKm,
@@ -42,11 +43,22 @@ const svgIcon = (google, svg, size) => ({
   anchor: new google.maps.Point(size / 2, size / 2),
 });
 
-const packageIcon = (google, kind) =>
+// package marker colour for each movement state (see movementState) - the
+// same colours as the status dot under the map (shipmentMap.css)
+const STATE_COLORS = {
+  moving: '#16A34A',
+  arriving: '#D97706',
+  paused: '#D97706',
+  waiting: '#11194E',
+  delivered: '#0F7B4B',
+  stopped: '#C2000A',
+};
+
+const packageIcon = (google, kind, color = '#FE000B') =>
   svgIcon(
     google,
     `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-      <circle cx="24" cy="24" r="21" fill="#FE000B" stroke="#fff" stroke-width="3"/>
+      <circle cx="24" cy="24" r="21" fill="${color}" stroke="#fff" stroke-width="3"/>
       <g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${VEHICLE_ICONS[kind]}</g>
     </svg>`,
     48
@@ -93,7 +105,55 @@ function pointAlong(google, path, cumulative, meters) {
   return { point: google.maps.geometry.spherical.interpolate(path[lo - 1], path[lo], t), index: lo };
 }
 
-export default function ShipmentMap({ shipment, apiKey, clockOffsetMs = 0, height = 320 }) {
+const hasRoute = (s) =>
+  [s.originLat, s.originLng, s.destLat, s.destLng].every((v) => v !== null && v !== undefined && v !== '');
+
+// routes located for shipments saved without one, shared by every map on the page
+const located = new Map();
+function locateOnce(s, apiKey) {
+  const key = [s.origin, s.destination, s.freightType].join('|');
+  if (!located.has(key)) {
+    located.set(
+      key,
+      locateRoute(s, apiKey).catch((err) => {
+        located.delete(key);
+        throw err;
+      })
+    );
+  }
+  return located.get(key);
+}
+
+export default function ShipmentMap({ shipment: saved, apiKey, clockOffsetMs = 0, height = 320 }) {
+  // Shipments saved before a map key was set (or whose lookup failed) have no
+  // coordinates: locate them here so every shipment still shows on the map.
+  const lookupKey =
+    !hasRoute(saved) && saved.origin && saved.destination ? [saved.origin, saved.destination, saved.freightType].join('|') : '';
+  const [lookup, setLookup] = useState(null);
+  useEffect(() => {
+    if (!lookupKey) return undefined;
+    let cancelled = false;
+    setLookup({ key: lookupKey, pending: true });
+    locateOnce(saved, apiKey)
+      .then((route) => !cancelled && setLookup({ key: lookupKey, route }))
+      .catch((err) => !cancelled && setLookup({ key: lookupKey, error: err.message }));
+    return () => {
+      cancelled = true;
+    };
+  }, [lookupKey, apiKey]);
+  const fallback = lookup?.key === lookupKey ? lookup : null;
+  const shipment = fallback?.route
+    ? {
+        ...saved,
+        originLat: fallback.route.originLat,
+        originLng: fallback.route.originLng,
+        destLat: fallback.route.destLat,
+        destLng: fallback.route.destLng,
+        routePolyline: fallback.route.routePolyline,
+        routeDistanceKm: fallback.route.routeDistanceKm,
+      }
+    : saved;
+
   const canvas = useRef(null);
   const mapRef = useRef(null);
   const live = useRef(shipment);
@@ -107,9 +167,7 @@ export default function ShipmentMap({ shipment, apiKey, clockOffsetMs = 0, heigh
   const [follow, setFollow] = useState(false);
   followRef.current = follow;
 
-  const hasCoords = [shipment.originLat, shipment.originLng, shipment.destLat, shipment.destLng].every(
-    (v) => v !== null && v !== undefined && v !== ''
-  );
+  const hasCoords = hasRoute(shipment);
   // the map is rebuilt only when the route itself changes; status/progress
   // updates flow through `live` without redrawing
   const routeKey = hasCoords
@@ -170,6 +228,8 @@ export default function ShipmentMap({ shipment, apiKey, clockOffsetMs = 0, heigh
           zIndex: 10,
         });
         overlays = [remaining, covered, start, end, pkg];
+        const vehicle = VEHICLE_BY_FREIGHT[s.freightType] || 'truck';
+        let shownState = '';
 
         const tick = () => {
           const cur = live.current;
@@ -182,6 +242,11 @@ export default function ShipmentMap({ shipment, apiKey, clockOffsetMs = 0, heigh
           covered.setPath([...path.slice(0, index), point]);
           if (followRef.current) map.panTo(point);
           const state = movementState(cur, km, routeKm, now);
+          if (state.key !== shownState) {
+            shownState = state.key;
+            pkg.setIcon(packageIcon(google, vehicle, STATE_COLORS[state.key]));
+          }
+          pkg.setTitle(`${cur.status} — ${state.label}`);
           setStats({
             covered: km,
             total: routeKm,
@@ -216,7 +281,11 @@ export default function ShipmentMap({ shipment, apiKey, clockOffsetMs = 0, heigh
     return (
       <div className="tj-mapbox">
         <div className="tj-map tj-map--empty" style={{ height }}>
-          <span>The map will appear once the origin and destination have been located.</span>
+          <span>
+            {fallback?.pending
+              ? 'Locating the route on the map…'
+              : fallback?.error || 'The map will appear once the origin and destination have been located.'}
+          </span>
         </div>
       </div>
     );

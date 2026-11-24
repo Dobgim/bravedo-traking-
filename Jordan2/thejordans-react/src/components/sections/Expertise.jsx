@@ -37,7 +37,7 @@ export default function Expertise() {
                 >
                   <div className="pxl-item--inner" data-wow-delay="120ms">
                     <div className="pxl-item--image " data-parallax-value="">
-                      <img decoding="async" src="/uploads/2026/02/1.png" className="no-lazyload attachment-full" alt="" />
+                      <img loading="lazy" decoding="async" src="/uploads/2026/02/1.png" className="no-lazyload attachment-full" alt="" />
                     </div>
                   </div>
                 </div>
@@ -91,7 +91,7 @@ export default function Expertise() {
                 >
                   <div className="pxl-item--inner" data-wow-delay="120ms">
                     <div className="pxl-item--image " data-parallax-value="">
-                      <img decoding="async" src="/uploads/2026/03/ccc-1.png" className="no-lazyload attachment-full" alt="" />
+                      <img loading="lazy" decoding="async" src="/uploads/2026/03/ccc-1.png" className="no-lazyload attachment-full" alt="" />
                     </div>
                   </div>
                 </div>
@@ -128,7 +128,7 @@ export default function Expertise() {
                 >
                   <div className="pxl-item--inner" data-wow-delay="120ms">
                     <div className="pxl-item--image " data-parallax-value="">
-                      <img decoding="async" src="/uploads/2026/02/2.png" className="no-lazyload attachment-full" alt="" />
+                      <img loading="lazy" decoding="async" src="/uploads/2026/02/2.png" className="no-lazyload attachment-full" alt="" />
                     </div>
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export default function Expertise() {
                 >
                   <div className="pxl-item--inner" data-wow-delay="120ms">
                     <div className="pxl-item--image " data-parallax-value="">
-                      <img decoding="async" src="/uploads/2026/03/ccc-1.png" className="no-lazyload attachment-full" alt="" />
+                      <img loading="lazy" decoding="async" src="/uploads/2026/03/ccc-1.png" className="no-lazyload attachment-full" alt="" />
                     </div>
                   </div>
                 </div>
@@ -217,7 +217,7 @@ export default function Expertise() {
                 >
                   <div className="pxl-item--inner" data-wow-delay="120ms">
                     <div className="pxl-item--image " data-parallax-value="">
-                      <img decoding="async" src="/uploads/2026/02/3.png" className="no-lazyload attachment-full" alt="" />
+                      <img loading="lazy" decoding="async" src="/uploads/2026/02/3.png" className="no-lazyload attachment-full" alt="" />
                     </div>
                   </div>
                 </div>
@@ -269,7 +269,7 @@ export default function Expertise() {
                 >
                   <div className="pxl-item--inner" data-wow-delay="120ms">
                     <div className="pxl-item--image " data-parallax-value="">
-                      <img decoding="async" src="/uploads/2026/03/ccc-1.png" className="no-lazyload attachment-full" alt="" />
+                      <img loading="lazy" decoding="async" src="/uploads/2026/03/ccc-1.png" className="no-lazyload attachment-full" alt="" />
                     </div>
                   </div>
                 </div>
@@ -306,7 +306,7 @@ export default function Expertise() {
                 >
                   <div className="pxl-item--inner" data-wow-delay="120ms">
                     <div className="pxl-item--image " data-parallax-value="">
-                      <img decoding="async" src="/uploads/2026/02/4.png" className="no-lazyload attachment-full" alt="" />
+                      <img loading="lazy" decoding="async" src="/uploads/2026/02/4.png" className="no-lazyload attachment-full" alt="" />
                     </div>
                   </div>
                 </div>
@@ -360,7 +360,7 @@ export default function Expertise() {
                 >
                   <div className="pxl-item--inner" data-wow-delay="120ms">
                     <div className="pxl-item--image " data-parallax-value="">
-                      <img decoding="async" src="/uploads/2026/03/ccc-1.png" className="no-lazyload attachment-full" alt="" />
+                      <img loading="lazy" decoding="async" src="/uploads/2026/03/ccc-1.png" className="no-lazyload attachment-full" alt="" />
                     </div>
                   </div>
                 </div>
