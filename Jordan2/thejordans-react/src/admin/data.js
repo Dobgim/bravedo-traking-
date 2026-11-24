@@ -126,7 +126,7 @@ export async function deleteEvent(shipmentId, eventId) {
 }
 
 /* ---------------- overview ---------------- */
-const STATUSES = ['Pending', 'Picked Up', 'In Transit', 'Out for Delivery', 'Delivered', 'On Hold', 'Cancelled'];
+const STATUSES = ['Label Created', 'Facility Received', 'Delayed', 'In Transit', 'Out for Delivery', 'Delivered', 'On Hold', 'Cancelled'];
 
 export async function getStats() {
   const [shipments, quotes, subscribers] = await Promise.all([
@@ -143,7 +143,7 @@ export async function getStats() {
   return {
     totals: {
       shipments: ships.length,
-      active: byStatus['Picked Up'] + byStatus['In Transit'] + byStatus['Out for Delivery'],
+      active: byStatus['Facility Received'] + byStatus['Delayed'] + byStatus['In Transit'] + byStatus['Out for Delivery'],
       delivered: byStatus.Delivered,
       quotes: qs.length,
       newQuotes: qs.filter((q) => q.status === 'new').length,

@@ -33,7 +33,7 @@ const blankInvoice = (settings) => ({
 
 const EMPTY = {
   trackingNumber: '',
-  status: 'Pending',
+  status: 'Label Created',
   origin: '',
   destination: '',
   freightType: 'Truck Freight',

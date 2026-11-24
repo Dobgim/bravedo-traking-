@@ -294,12 +294,13 @@
   background: #e2f5eb;
   color: #0f7b4b;
 }
-.tjt .tjt-status--pending {
+.tjt .tjt-status--label-created {
   background: #edeef3;
   color: #4b5068;
 }
 .tjt .tjt-status--out-for-delivery,
-.tjt .tjt-status--on-hold {
+.tjt .tjt-status--on-hold,
+.tjt .tjt-status--delayed {
   background: #fff1d9;
   color: #9a5800;
 }

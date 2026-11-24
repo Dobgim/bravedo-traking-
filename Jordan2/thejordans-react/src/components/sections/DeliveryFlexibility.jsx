@@ -24,7 +24,7 @@ export default function DeliveryFlexibility() {
               <div className="pxl-icon-box pxl-icon-box3 " data-wow-delay="ms">
                 <div className="pxl-item--inner">
                   <div className="pxl-item--bgr">
-                    <div className="bgr" style={{ backgroundImage: "url(/uploads/2026/03/h4-8-1.webp)" }}></div>
+                    <div className="bgr" style={{ backgroundImage: "url(/uploads/2026/03/h4-8-1-wbx.webp)" }}></div>
                   </div>
                   <div className="pxl-item--logo">
                     <img loading="lazy" decoding="async" src="/uploads/2026/03/lg.png" className="attachment-full" alt="" />

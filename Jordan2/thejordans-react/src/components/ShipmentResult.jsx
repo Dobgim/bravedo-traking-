@@ -2,7 +2,7 @@ import ShipmentMap from './ShipmentMap.jsx';
 
 /* Tracking details for one shipment: status, route, live map, progress and history. */
 
-const STEPS = ['Pending', 'Picked Up', 'In Transit', 'Out for Delivery', 'Delivered'];
+const STEPS = ['Label Created', 'Facility Received', 'In Transit', 'Out for Delivery', 'Delivered'];
 
 export const formatDate = (iso, withTime = false) => {
   if (!iso) return '';
@@ -19,7 +19,7 @@ export const formatDate = (iso, withTime = false) => {
 
 export default function ShipmentResult({ shipment, mapsKey, clockOffset = 0 }) {
   const lastRegular = shipment.events.find((e) => STEPS.includes(e.status))?.status;
-  const currentStep = STEPS.indexOf(STEPS.includes(shipment.status) ? shipment.status : lastRegular || 'Pending');
+  const currentStep = STEPS.indexOf(STEPS.includes(shipment.status) ? shipment.status : lastRegular || 'Label Created');
   const exception = !STEPS.includes(shipment.status);
 
   return (

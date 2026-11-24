@@ -1,13 +1,15 @@
 /* Shared building blocks for the admin screens. */
 
-export const STATUSES = ['Pending', 'Picked Up', 'In Transit', 'Out for Delivery', 'Delivered', 'On Hold', 'Cancelled'];
+// same names and order as the database (shipments_status_check)
+export const STATUSES = ['Label Created', 'Facility Received', 'Delayed', 'In Transit', 'Out for Delivery', 'Delivered', 'On Hold', 'Cancelled'];
 export const FREIGHT_TYPES = ['Truck Freight', 'Ship Freight', 'Train Freight', 'Plane Freight'];
 export const SERVICES = ['Fragile', 'Express', 'Insurance', 'Packaging'];
 export const QUOTE_STATUSES = ['new', 'contacted', 'closed'];
 
 const STATUS_TONE = {
-  Pending: 'neutral',
-  'Picked Up': 'info',
+  'Label Created': 'neutral',
+  'Facility Received': 'info',
+  Delayed: 'warn',
   'In Transit': 'info',
   'Out for Delivery': 'warn',
   Delivered: 'ok',
