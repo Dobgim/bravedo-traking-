@@ -119,7 +119,7 @@ export default function SidePanel() {
                         </div>
                         <div className="content-right">
                           <h5 className="pxl-item--title el-empty">Contact Us</h5>
-                          <p className="pxl-item--description">{" +1800 - 668 333 info@worldbridgexpress.com "}</p>
+                          <p className="pxl-item--description">{" +1800 - 668 333 support@worldbridgexpress.com "}</p>
                         </div>
                       </div>
                     </div>

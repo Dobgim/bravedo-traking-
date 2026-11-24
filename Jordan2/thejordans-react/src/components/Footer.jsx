@@ -343,7 +343,7 @@ export default function Footer() {
                       <div className="pxl-text-editor underline ">
                         <div className="pxl-item--inner  " data-wow-delay="ms">
                           <p>
-                            <a href="mailto:info@worldbridgexpress.com">info@worldbridgexpress.com</a>
+                            <a href="mailto:support@worldbridgexpress.com">support@worldbridgexpress.com</a>
                           </p>
                         </div>
                       </div>
