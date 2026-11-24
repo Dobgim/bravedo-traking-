@@ -27,7 +27,7 @@ export default function DeliveryFlexibility() {
                     <div className="bgr" style={{ backgroundImage: "url(/uploads/2026/03/h4-8-1-wbx.webp)" }}></div>
                   </div>
                   <div className="pxl-item--logo">
-                    <img loading="lazy" decoding="async" src="/uploads/2026/03/lg.png" className="attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/lg-wbx.png" className="attachment-full" alt="" />
                   </div>
                   <div className="pxl-item--icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="33" viewBox="0 0 34 33" fill="none">
@@ -106,7 +106,7 @@ export default function DeliveryFlexibility() {
                     <div className="bgr" style={{ backgroundImage: "url(/uploads/2026/03/h4-9-1.webp)" }}></div>
                   </div>
                   <div className="pxl-item--logo">
-                    <img loading="lazy" decoding="async" src="/uploads/2026/03/lg.png" className="attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/lg-wbx.png" className="attachment-full" alt="" />
                   </div>
                   <div className="pxl-item--icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="41" viewBox="0 0 34 41" fill="none">
@@ -202,7 +202,7 @@ export default function DeliveryFlexibility() {
                     <div className="bgr" style={{ backgroundImage: "url(/uploads/2026/03/h4-10-1.webp)" }}></div>
                   </div>
                   <div className="pxl-item--logo">
-                    <img loading="lazy" decoding="async" src="/uploads/2026/03/lg.png" className="attachment-full" alt="" />
+                    <img loading="lazy" decoding="async" src="/uploads/2026/03/lg-wbx.png" className="attachment-full" alt="" />
                   </div>
                   <div className="pxl-item--icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">

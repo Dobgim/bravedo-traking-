@@ -146,7 +146,52 @@ def boxes():
     return img
 
 
+def mono_mark(size):
+    """The globe mark as a one-colour silhouette (grid lines cut out), alpha only."""
+    m = Image.open(BRAND / "mark-1024.png").convert("RGBA").resize((size, size), Image.LANCZOS)
+    arr = np.asarray(m).astype(np.float32)
+    whiteness = np.clip((arr[..., :3].min(2) - 150) / 105, 0, 1)   # the white grid lines
+    return (arr[..., 3] / 255) * (1 - whiteness)
+
+
+def watermark(name, out_name):
+    """Old faint/solid brand-mark decorations redrawn with the new mark: same
+    canvas, same place, same colour and opacity."""
+    rel = f"Jordan2/thejordans-react/public/uploads/2026/03/{name}"
+    data = subprocess.run(["git", "show", f"f953498:{rel}"], cwd=ROOT, capture_output=True, check=True).stdout
+    old = Image.open(BytesIO(data)).convert("RGBA")
+    a = np.asarray(old)[..., 3]
+    ys, xs = np.nonzero(a)
+    x0, y0, x1, y1 = xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
+    color = tuple(int(v) for v in np.asarray(old)[ys[len(ys) // 2], xs[len(xs) // 2], :3])
+    peak = int(a.max())
+    size = int(min(x1 - x0, y1 - y0) * 1.08)
+    alpha = mono_mark(size)
+    out = np.zeros((old.height, old.width, 4), np.uint8)
+    out[..., :3] = color
+    cx, cy = (x0 + x1) // 2, (y0 + y1) // 2
+    ox, oy = cx - size // 2, cy - size // 2
+    sx0, sy0 = max(0, -ox), max(0, -oy)
+    dx0, dy0 = max(0, ox), max(0, oy)
+    w = min(size - sx0, old.width - dx0)
+    h = min(size - sy0, old.height - dy0)
+    out[dy0:dy0 + h, dx0:dx0 + w, 3] = (alpha[sy0:sy0 + h, sx0:sx0 + w] * peak).astype(np.uint8)
+    img = Image.fromarray(out)
+    path = UP / out_name
+    img.save(path, quality=90) if path.suffix == ".webp" else img.save(path, optimize=True)
+
+
+WATERMARKS = {
+    "bggg.png": "bggg-wbx.png",
+    "lg.png": "lg-wbx.png",
+    "qttt.png": "qttt-wbx.png",
+    "h4-7-1.webp": "h4-7-1-wbx.webp",
+}
+
+
 if __name__ == "__main__":
+    for old_name, new_name in WATERMARKS.items():
+        watermark(old_name, new_name)
     t = truck()
     t.save(UP / "h4-5-wbx.webp", quality=88)
     b = boxes()
