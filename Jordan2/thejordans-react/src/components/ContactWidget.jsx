@@ -65,7 +65,7 @@ export default function ContactWidget() {
       <div id="alx-contact-container" className={cx(mounted && 'show')}>
         <div id="alx-dropdown" role="menu" className={cx(open && 'open', centered && 'alxw-center')}>
           <div className="alxw-head">
-            <strong>TheJordans Support</strong>
+            <strong>WorldBridgeXpress Support</strong>
             <span>
               <span className="alxw-dot"></span>Online &mdash; we usually reply instantly
             </span>
@@ -88,7 +88,7 @@ export default function ContactWidget() {
 
           <a
             className="alxw-opt"
-            href="https://wa.me/1231232131?text=Hello%20TheJordans!"
+            href="https://wa.me/1231232131?text=Hello%20WorldBridgeXpress!"
             target="_blank"
             rel="noopener"
             role="menuitem"
@@ -103,7 +103,7 @@ export default function ContactWidget() {
             </div>
           </a>
 
-          <a className="alxw-opt" href="mailto:thejordans@support.com" role="menuitem" onClick={() => toggle(false)}>
+          <a className="alxw-opt" href="mailto:support@worldbridgexpress.com" role="menuitem" onClick={() => toggle(false)}>
             <svg viewBox="0 0 24 24" fill="#11194E">
               <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5z" />
             </svg>
@@ -113,7 +113,7 @@ export default function ContactWidget() {
             </div>
           </a>
 
-          <div className="alxw-foot">TheJordans &middot; Logistics Support</div>
+          <div className="alxw-foot">WorldBridgeXpress &middot; Logistics Support</div>
         </div>
 
         {/* DTD CHAT BUTTON */}
@@ -122,7 +122,7 @@ export default function ContactWidget() {
           onClick={() => toggle()}
           aria-haspopup="true"
           aria-expanded={open}
-          aria-label="Contact TheJordans"
+          aria-label="Contact WorldBridgeXpress"
           style={{ position: 'fixed', bottom: '24px', right: '18px', zIndex: 99998, cursor: 'pointer' }}
         >
           <div className="alxw-btn-core">

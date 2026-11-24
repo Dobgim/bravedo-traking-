@@ -138,7 +138,7 @@ function Layout() {
     <div className={`shell${menuOpen ? ' shell--menu' : ''}`}>
       <aside className="sidebar">
         <div className="sidebar__brand">
-          <img src="/uploads/2026/02/logo-light.webp" alt="TheJordans" />
+          <img src="/uploads/2026/02/logo-light.webp" alt="WorldBridgeXpress" />
           <span className="sidebar__tag">Admin</span>
         </div>
         <nav className="sidebar__nav">

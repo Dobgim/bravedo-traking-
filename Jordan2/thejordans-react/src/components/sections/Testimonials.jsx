@@ -200,7 +200,7 @@ export default function Testimonials() {
               <div className="pxl-text-editor default ">
                 <div className="pxl-item--inner  " data-wow-delay="ms">
                   <p>
-                    Real feedback from teams who rely on TheJordans for consistent, dependable logistics support.
+                    Real feedback from teams who rely on WorldBridgeXpress for consistent, dependable logistics support.
                   </p>
                 </div>
               </div>
@@ -289,7 +289,7 @@ export default function Testimonials() {
                           <div className="pxl-item--avatar " style={{ backgroundImage: "url(/uploads/2026/03/h4-12.webp)" }}></div>
                           <div className="content-right">
                             <p className="pxl-item--description">
-                              “TheJordans has been a reliable logistics partner for our day-to-day operations. Their team communicates clearly, handles shipments consistently, and makes complex deliveries much easier to manage.”
+                              “WorldBridgeXpress has been a reliable logistics partner for our day-to-day operations. Their team communicates clearly, handles shipments consistently, and makes complex deliveries much easier to manage.”
                             </p>
                             <div className="author">
                               <div className="pxl-item--quote">
@@ -306,7 +306,7 @@ export default function Testimonials() {
                           <div className="pxl-item--avatar " style={{ backgroundImage: "url(/uploads/2026/03/h4-13.webp)" }}></div>
                           <div className="content-right">
                             <p className="pxl-item--description">
-                              “What we value most is the consistency and transparency TheJordans brings to our logistics workflows. Their approach fits perfectly with fast-moving e-commerce operations.”
+                              “What we value most is the consistency and transparency WorldBridgeXpress brings to our logistics workflows. Their approach fits perfectly with fast-moving e-commerce operations.”
                             </p>
                             <div className="author">
                               <div className="pxl-item--quote">

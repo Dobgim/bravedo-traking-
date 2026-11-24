@@ -140,7 +140,7 @@ export default function Footer() {
                     <div className="elementor-widget-container">
                       <div id="pxl-pxl_heading-4a316ff-9800" className="pxl-heading   px-sub-title-default-style ">
                         <div className="pxl-heading--inner">
-                          <h3 className="pxl-item--title style-default color highlight-default " data-wow-delay="ms">{" Start Shipping Smarter With TheJordans Logistics. "}</h3>
+                          <h3 className="pxl-item--title style-default color highlight-default " data-wow-delay="ms">{" Start Shipping Smarter With WorldBridgeXpress. "}</h3>
                         </div>
                       </div>
                     </div>
@@ -343,7 +343,7 @@ export default function Footer() {
                       <div className="pxl-text-editor underline ">
                         <div className="pxl-item--inner  " data-wow-delay="ms">
                           <p>
-                            <a href="mailto:info@example.com">info@example.com</a>
+                            <a href="mailto:info@worldbridgexpress.com">info@worldbridgexpress.com</a>
                           </p>
                         </div>
                       </div>
@@ -432,7 +432,7 @@ export default function Footer() {
                     <div className="elementor-widget-container">
                       <div className="pxl-text-editor underline ">
                         <div className="pxl-item--inner  " data-wow-delay="ms">
-                          <p>© 2026 TheJordans. All Rights Reserved.</p>
+                          <p>© 2026 WorldBridgeXpress (worldbridgexpress.com). All Rights Reserved.</p>
                         </div>
                       </div>
                     </div>

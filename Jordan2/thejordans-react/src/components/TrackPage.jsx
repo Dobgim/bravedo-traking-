@@ -59,7 +59,7 @@ export default function TrackPage() {
   const searched = useRef(false);
 
   useEffect(() => {
-    document.title = 'Track Your Shipment – TheJordans Logistics & Freight';
+    document.title = 'Track Your Shipment – WorldBridgeXpress Logistics & Freight';
   }, []);
 
   // back/forward, and tracking boxes elsewhere on the page (see SiteForms)

@@ -149,7 +149,7 @@ export default function AboutUs() {
                 <div className="pxl-text-editor default ">
                   <div className="pxl-item--inner  " data-wow-delay="ms">
                     <p>
-                      TheJordans is a logistics partner built for fast-moving businesses. We combine experienced operations, clear communication, and reliable execution — so your shipments move smoothly, every step of the way.
+                      WorldBridgeXpress is a logistics partner built for fast-moving businesses. We combine experienced operations, clear communication, and reliable execution — so your shipments move smoothly, every step of the way.
                     </p>
                     <p>
                       Our hands-on team supports both B2B and e-commerce operations, delivering consistent performance and dependable logistics at every stage.

@@ -374,7 +374,7 @@ export default function RequestQuote() {
                     </svg>
                   </a>
                   {" "}
-                  <span className="pxl-icon-label">+1800 - 668 333 info@example.com</span>
+                  <span className="pxl-icon-label">+1800 - 668 333 info@worldbridgexpress.com</span>
                 </div>
               </div>
             </div>

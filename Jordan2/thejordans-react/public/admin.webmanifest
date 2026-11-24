@@ -1,6 +1,6 @@
 {
-  "name": "TheJordans Admin",
-  "short_name": "TJ Admin",
+  "name": "WorldBridgeXpress Admin",
+  "short_name": "WBX Admin",
   "description": "Create shipments, post tracking updates and issue invoices.",
   "start_url": "/admin/",
   "scope": "/admin/",

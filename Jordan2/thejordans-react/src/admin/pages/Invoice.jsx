@@ -42,7 +42,7 @@ export default function Invoice() {
     // becomes the suggested file name when saving as PDF
     document.title = `Invoice ${data.shipment.invoiceNumber} - ${data.settings.company_name}`;
     return () => {
-      document.title = 'TheJordans Admin';
+      document.title = 'WorldBridgeXpress Admin';
     };
   }, [data]);
 

@@ -43,7 +43,7 @@ export default function Login() {
 
       <section className="login__form-wrap">
         <form className="login__card" onSubmit={submit} noValidate>
-          <img src="/uploads/2026/02/logo.webp" alt="TheJordans" className="login__logo" />
+          <img src="/uploads/2026/02/logo.webp" alt="WorldBridgeXpress" className="login__logo" />
           <h1>Sign in to the dashboard</h1>
           <p className="muted">Use your administrator account.</p>
 

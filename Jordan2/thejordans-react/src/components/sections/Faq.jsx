@@ -60,7 +60,7 @@ export default function Faq() {
                   </svg>
                 </span>
                 {" "}
-                <span className="pxl--btn-text" data-text="Ask TheJordans Logistic">{" Ask TheJordans Logistic "}</span>
+                <span className="pxl--btn-text" data-text="Ask WorldBridgeXpress">{" Ask WorldBridgeXpress "}</span>
               </a>
             </div>
           </div>

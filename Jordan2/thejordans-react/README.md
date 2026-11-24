@@ -1,6 +1,6 @@
-# TheJordans — Logistics & Freight
+# WorldBridgeXpress — Logistics & Freight
 
-A React rebuild of the TheJordans website, with a live shipment-tracking map,
+A React rebuild of the WorldBridgeXpress website, with a live shipment-tracking map,
 an admin dashboard and printable invoices. Supabase provides the database and
 authentication. Configure the project URL and publishable key in the local
 `.env.local` file and in the deployment environment.
