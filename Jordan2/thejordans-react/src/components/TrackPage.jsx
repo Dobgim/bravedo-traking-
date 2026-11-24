@@ -2,8 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import ShipmentResult, { formatDate } from './ShipmentResult.jsx';
 import { getPublicSettings, getShipmentInvoice, trackShipment } from '../lib/publicApi.js';
 import ShipmentInvoice from './ShipmentInvoice.jsx';
-import { SignInRequired } from './AuthPages.jsx';
-import { useCustomer } from '../lib/customerAuth.js';
 import './trackPage.css';
 
 /*
@@ -59,9 +57,6 @@ export default function TrackPage() {
   const [clockOffset, setClockOffset] = useState(0);
   const [settings, setSettings] = useState(null);
   const [invoice, setInvoice] = useState(null);
-  // customers must be signed in to see a shipment
-  const { user, loading: authLoading } = useCustomer();
-  const signedIn = !!user;
   const resultRef = useRef(null);
   const searched = useRef(false);
 
@@ -93,7 +88,7 @@ export default function TrackPage() {
 
   const load = useCallback(
     async (silent) => {
-      if (!code || !signedIn) {
+      if (!code) {
         setState({});
         return;
       }
@@ -112,17 +107,16 @@ export default function TrackPage() {
         if (!silent) setState({ error: err.message });
       }
     },
-    [code, signedIn]
+    [code]
   );
 
   useEffect(() => {
-    if (authLoading) return undefined;
     load(false);
-    if (!code || !signedIn) return undefined;
+    if (!code) return undefined;
     // pick up status changes made in the dashboard while the page is open
     const timer = setInterval(() => load(true), REFRESH_MS);
     return () => clearInterval(timer);
-  }, [load, code, signedIn, authLoading]);
+  }, [load, code]);
 
   const found = state.shipment?.trackingNumber;
 
@@ -211,14 +205,6 @@ export default function TrackPage() {
             ))}
           </div>
         )}
-
-        {code && authLoading && (
-          <div className="tjt-card tjt-state">
-            <span className="tjt-spinner" /> Checking your account…
-          </div>
-        )}
-
-        {code && !authLoading && !signedIn && <SignInRequired code={code} />}
 
         {state.loading && (
           <div className="tjt-card tjt-state">

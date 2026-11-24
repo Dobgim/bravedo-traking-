@@ -114,7 +114,7 @@ export default function Hero() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-96a2e91-7755" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="/contact"
+                    href="/track"
                     className="btn  btn-default  two-icon  pxl-icon--left"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"
@@ -144,7 +144,7 @@ export default function Hero() {
                       </svg>
                     </span>
                     {" "}
-                    <span className="pxl--btn-text" data-text="Ship immediately">{" Ship immediately "}</span>
+                    <span className="pxl--btn-text" data-text="Track Shipment">{" Track Shipment "}</span>
                     {" "}
                     <span className="wrap-icon-2 wrap-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" viewBox="0 0 11 9" fill="none">
@@ -169,7 +169,7 @@ export default function Hero() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-caefa54-3276" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="/contact"
+                    href="/signup"
                     className="btn  btn-default  two-icon  pxl-icon--left"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"
@@ -199,7 +199,7 @@ export default function Hero() {
                       </svg>
                     </span>
                     {" "}
-                    <span className="pxl--btn-text" data-text="Calculate Fee">{" Calculate Fee "}</span>
+                    <span className="pxl--btn-text" data-text="Create Account">{" Create Account "}</span>
                     {" "}
                     <span className="wrap-icon-2 wrap-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" viewBox="0 0 11 9" fill="none">

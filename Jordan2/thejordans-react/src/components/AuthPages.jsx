@@ -4,8 +4,8 @@ import './auth.css';
 
 /*
  * Customer account pages (hand-written): /login, /signup, /forgot-password,
- * /reset-password and /account. Customers must be signed in to see a
- * shipment on the tracking page. Confirmation and reset emails are sent by
+ * /reset-password and /account. Accounts are optional - anyone can track a
+ * shipment with its tracking number. Confirmation and reset emails are sent by
  * Supabase Auth from support@worldbridgexpress.com.
  */
 
@@ -572,36 +572,5 @@ export function AccountPage() {
         </div>
       </form>
     </AuthShell>
-  );
-}
-
-/* Shown on /track instead of the shipment when nobody is signed in. */
-export function SignInRequired({ code }) {
-  const next = encodeURIComponent('/track' + (code ? `?code=${encodeURIComponent(code)}` : ''));
-  return (
-    <div className="wba-gate">
-      <span className="wba-gate__icon">
-        <Icon d={ICONS.lock} size={28} />
-      </span>
-      <h2>Sign in to view your shipment</h2>
-      <p>
-        {code ? (
-          <>
-            To protect your delivery details, shipment <strong>{code.toUpperCase()}</strong> is only shown to signed-in customers.
-          </>
-        ) : (
-          'To protect your delivery details, shipments are only shown to signed-in customers.'
-        )}{' '}
-        Creating an account is free and takes less than a minute.
-      </p>
-      <div className="wba-gate__actions">
-        <a className="wba-btn" href={`/login?next=${next}`}>
-          Sign In
-        </a>
-        <a className="wba-btn wba-btn--ghost" href={`/signup?next=${next}`}>
-          Create an account
-        </a>
-      </div>
-    </div>
   );
 }
