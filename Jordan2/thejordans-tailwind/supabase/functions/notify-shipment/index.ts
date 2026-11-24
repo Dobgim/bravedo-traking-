@@ -5,9 +5,9 @@
 //
 // Secrets (Supabase -> Edge Functions -> Secrets):
 //   NOTIFY_WEBHOOK_SECRET  shared with the trigger (private.app_secrets)
-//   SMTP_HOST              e.g. mail.thejordanslogistics.com
+//   SMTP_HOST              e.g. smtp.hostinger.com
 //   SMTP_PORT              465 (SSL)
-//   SMTP_USER              support@thejordanslogistics.com
+//   SMTP_USER              support@worldbridgexpress.com
 //   SMTP_PASS              the mailbox password
 //   SMTP_FROM              optional, defaults to SMTP_USER
 //
@@ -66,7 +66,7 @@ function emailHtml(o: {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f3f6;padding:24px 12px"><tr><td align="center">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:580px;background:#fff;border-radius:12px;overflow:hidden">
 <tr><td style="background:#11194e;padding:22px 28px;color:#fff">
-  <div style="font-size:18px;font-weight:bold">${esc(co.company_name || 'TheJordans Logistics & Freight')}</div>
+  <div style="font-size:18px;font-weight:bold">${esc(co.company_name || 'WorldBridgeXpress Logistics & Freight')}</div>
   <div style="font-size:13px;color:#c9cbe0;margin-top:2px">Shipment notification</div>
 </td></tr>
 <tr><td style="height:4px;background:#fe000b"></td></tr>
@@ -132,7 +132,7 @@ Deno.serve(async (req) => {
   ]);
   if (!s) return reply({ error: 'shipment not found' }, 404);
   const company = co ?? {};
-  const site = String(company.company_website || 'https://thejordanslogistics.com').replace(/\/+$/, '');
+  const site = String(company.company_website || 'https://worldbridgexpress.com').replace(/\/+$/, '');
   const trackUrl = `${site.startsWith('http') ? site : 'https://' + site}/track?code=${encodeURIComponent(s.tracking_number)}`;
   const latest = ev?.[0] ?? null;
 
@@ -194,7 +194,7 @@ Deno.serve(async (req) => {
     secure: port === 465,
     auth: { user: env('SMTP_USER'), pass: env('SMTP_PASS') },
   });
-  const from = `"${String(company.company_name || 'TheJordans Logistics').replace(/"/g, '')}" <${env('SMTP_FROM') || env('SMTP_USER')}>`;
+  const from = `"${String(company.company_name || 'WorldBridgeXpress').replace(/"/g, '')}" <${env('SMTP_FROM') || env('SMTP_USER')}>`;
   const instructionSubject = subjectFor('delivery_instruction');
   const sendInstructionNotice = async () => {
     try {
