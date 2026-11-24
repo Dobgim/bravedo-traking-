@@ -93,7 +93,7 @@ export default function SidePanel() {
                         </div>
                         <div className="content-right">
                           <h5 className="pxl-item--title el-empty">Our Location</h5>
-                          <p className="pxl-item--description">{" 1234 Elmwood Avenue, Suite 500 Atlanta, GA 30308, United States. "}</p>
+                          <p className="pxl-item--description">{" 8490 Avenida de la Fuente, San Diego, CA 92154, United States "}</p>
                         </div>
                       </div>
                     </div>

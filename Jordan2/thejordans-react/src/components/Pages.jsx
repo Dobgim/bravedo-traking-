@@ -326,7 +326,7 @@ export function ContactPage() {
   }, []);
   const phone = s.companyPhone || '+1 (904) 567-6548';
   const email = s.companyEmail || 'support@worldbridgexpress.com';
-  const address = s.companyAddress || '1234 Elmwood Ave, Ste 500, Atlanta, GA';
+  const address = s.companyAddress || '8490 Avenida de la Fuente, San Diego, CA 92154';
 
   const cards = [
     {

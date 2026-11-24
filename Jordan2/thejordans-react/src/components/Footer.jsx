@@ -360,7 +360,7 @@ export default function Footer() {
                       <div className="pxl-text-editor underline ">
                         <div className="pxl-item--inner  " data-wow-delay="ms">
                           <p>
-                            <a href="https://www.google.com/maps" target="_blank" rel="noopener">1234 Elmwood Ave, Ste 500, Atlanta, GA</a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=8490+Avenida+de+la+Fuente%2C+San+Diego%2C+CA+92154" target="_blank" rel="noopener">8490 Avenida de la Fuente, San Diego, CA 92154</a>
                           </p>
                         </div>
                       </div>

@@ -140,16 +140,9 @@ export default function Header() {
                             </div>
                             <div className="list-language">
                               <div className="pxl--item">
-                                <a href="#">{" Texas, United States "}</a>
-                              </div>
-                              <div className="pxl--item">
-                                <a href="#">{" Greater London, UK "}</a>
-                              </div>
-                              <div className="pxl--item">
-                                <a href="#">{" Illinois, United States "}</a>
-                              </div>
-                              <div className="pxl--item">
-                                <a href="#">{" West Midlands , UK "}</a>
+                                <a href="https://www.google.com/maps/search/?api=1&query=8490+Avenida+de+la+Fuente%2C+San+Diego%2C+CA+92154" target="_blank" rel="noopener">
+                                  {" San Diego, CA 92154, United States "}
+                                </a>
                               </div>
                             </div>
                           </div>
