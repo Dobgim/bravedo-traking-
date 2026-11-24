@@ -37,7 +37,7 @@ export default function Footer() {
                   >
                     <div className="elementor-widget-container">
                       <div className="pxl-logo " data-wow-delay="ms">
-                        <img loading="lazy" decoding="async" src="/uploads/2026/02/wbx-logo-light.webp" className="attachment-full" alt="" />
+                        <img loading="lazy" decoding="async" src="/uploads/2026/02/wbx-logo-light.webp" className="attachment-full" alt="WorldBridgeXpress" />
                       </div>
                     </div>
                   </div>
@@ -81,7 +81,7 @@ export default function Footer() {
                               <ul></ul>
                             </div>
                             <form
-                              action="https://demo6.atlascargotransit.com/contact/subscribe"
+                              action="/news"
                               method="post"
                               className="wpcf7-form init"
                               data-native-form="subscribe"
@@ -155,7 +155,7 @@ export default function Footer() {
                     <div className="elementor-widget-container">
                       <div id="pxl-pxl_button-531b663-4878" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                         <a
-                          href="contact-us"
+                          href="/contact"
                           className="btn  btn-default  two-icon  pxl-icon--left"
                           data-wow-delay="ms"
                           data-target=".pxl-page-popup-template-0"
@@ -239,22 +239,22 @@ export default function Footer() {
                           <h3 className="pxl-widget-title pxl-empty"></h3>
                           <ul id="pxl-link-pxl_link-fbd7c55-3747" className="pxl-link pxl-link-l1 style-2 type-vertical">
                             <li className="pxl-item--link  ">
-                              <a className="" href="about-us/">
+                              <a className="" href="/about">
                                 <span>About</span>
                               </a>
                             </li>
                             <li className="pxl-item--link  ">
-                              <a className="" href="our-services">
+                              <a className="" href="/services">
                                 <span>Our Services</span>
                               </a>
                             </li>
                             <li className="pxl-item--link  ">
-                              <a className="" href="about-us">
+                              <a className="" href="/about#sustainability">
                                 <span>Sustainability</span>
                               </a>
                             </li>
                             <li className="pxl-item--link  ">
-                              <a className="" href="blog-standard">
+                              <a className="" href="/news">
                                 <span>News &amp; Media</span>
                               </a>
                             </li>
@@ -279,27 +279,27 @@ export default function Footer() {
                           <h3 className="pxl-widget-title pxl-empty"></h3>
                           <ul id="pxl-link-pxl_link-2c08380-7788" className="pxl-link pxl-link-l1 style-2 type-vertical">
                             <li className="pxl-item--link  ">
-                              <a className="" href="service/air-freight/">
+                              <a className="" href="/services#air-freight">
                                 <span>Air Freight</span>
                               </a>
                             </li>
                             <li className="pxl-item--link  ">
-                              <a className="" href="service/ocean-freight/">
+                              <a className="" href="/services#sea-freight">
                                 <span>Sea Freight</span>
                               </a>
                             </li>
                             <li className="pxl-item--link  ">
-                              <a className="" href="service/road-freight/">
+                              <a className="" href="/services#road-freight">
                                 <span>Land Transport</span>
                               </a>
                             </li>
                             <li className="pxl-item--link  ">
-                              <a className="" href="service/container/">
+                              <a className="" href="/services#groupage">
                                 <span>Groupage</span>
                               </a>
                             </li>
                             <li className="pxl-item--link  ">
-                              <a className="" href="service/supply-chain/">
+                              <a className="" href="/contact">
                                 <span>Consultancy</span>
                               </a>
                             </li>
@@ -486,7 +486,7 @@ export default function Footer() {
                       <div className="pxl-text-editor underline ">
                         <div className="pxl-item--inner  " data-wow-delay="ms">
                           <p>
-                            <a href="#">Site Map</a>
+                            <a href="/sitemap">Site Map</a>
                           </p>
                         </div>
                       </div>

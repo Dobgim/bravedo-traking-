@@ -217,7 +217,7 @@ export default function Testimonials() {
             <div className="elementor-widget-container">
               <div id="pxl-pxl_button-d4e74c8-2548" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                 <a
-                  href="client/"
+                  href="/about#testimonials"
                   className="btn  btn-default  two-icon  pxl-icon--left"
                   data-wow-delay="ms"
                   data-target=".pxl-page-popup-template-0"

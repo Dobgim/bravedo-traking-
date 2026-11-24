@@ -61,7 +61,7 @@ export default function BusinessServices() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-38dd1fb-3300" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="our-services/"
+                    href="/services"
                     className="btn  btn-default  two-icon  pxl-icon--left"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"
@@ -130,7 +130,7 @@ export default function BusinessServices() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-0d1b3fe-1609" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="our-services/"
+                    href="/services"
                     className="btn  btn-default  bg-default  pxl-icon--left"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"
@@ -150,7 +150,7 @@ export default function BusinessServices() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-62aaaff-1513" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="our-services/"
+                    href="/services"
                     className="btn  btn-default  bg-default  pxl-icon--left"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"
@@ -170,7 +170,7 @@ export default function BusinessServices() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-2107c67-6012" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="our-services/"
+                    href="/services"
                     className="btn  btn-default  bg-default  pxl-icon--left"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"
@@ -190,7 +190,7 @@ export default function BusinessServices() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-a18cc2e-7638" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="our-services/"
+                    href="/services"
                     className="btn  btn-default  bg-default  pxl-icon--left"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"

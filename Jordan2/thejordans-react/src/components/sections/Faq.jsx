@@ -17,7 +17,7 @@ export default function Faq() {
           <div className="elementor-widget-container">
             <div id="pxl-pxl_button-cbc7055-4343" className="pxl-button pxl-atc-link " data-wow-delay="ms">
               <a
-                href="faqs/"
+                href="/contact#faq"
                 className="btn  full-space-between  style-icon-2  pxl-icon--right"
                 data-wow-delay="ms"
                 data-target=".pxl-page-popup-template-0"
@@ -46,7 +46,7 @@ export default function Faq() {
           <div className="elementor-widget-container">
             <div id="pxl-pxl_button-98fa87c-2748" className="pxl-button pxl-atc-link " data-wow-delay="ms">
               <a
-                href="contact-us/"
+                href="/contact"
                 className="btn  full-space-between  style-icon-2  pxl-icon--right"
                 data-wow-delay="ms"
                 data-target=".pxl-page-popup-template-0"
@@ -75,7 +75,7 @@ export default function Faq() {
           <div className="elementor-widget-container">
             <div id="pxl-pxl_button-f465a54-2122" className="pxl-button pxl-atc-link " data-wow-delay="ms">
               <a
-                href="garage/"
+                href="/track"
                 className="btn  full-space-between  style-icon-2  pxl-icon--right"
                 data-wow-delay="ms"
                 data-target=".pxl-page-popup-template-0"

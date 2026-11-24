@@ -219,7 +219,7 @@ export default function AboutUs() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-691ffbb-2790" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="about-us/"
+                    href="/about"
                     className="btn  btn-default  two-icon  pxl-icon--left"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"

@@ -234,7 +234,7 @@ export default function Partners() {
             <div className="elementor-widget-container">
               <div className="pxl-icon-box pxl-icon-box2 " data-wow-delay="ms">
                 <div className="pxl-item--inner">
-                  <a className="link-box" href="client/"></a>
+                  <a className="link-box" href="/about#testimonials"></a>
                   <h5 className="pxl-item--title el-empty">Become a Partner</h5>
                   <div className="pxl-item--icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="22" viewBox="0 0 26 22" fill="none">

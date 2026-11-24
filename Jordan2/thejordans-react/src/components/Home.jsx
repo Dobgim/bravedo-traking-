@@ -1,5 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
-import { deferBackgrounds } from '../lazyBackgrounds.js';
+import ThemePage from './ThemePage.jsx';
 import Hero from './sections/Hero.jsx';
 import TrackShipment from './sections/TrackShipment.jsx';
 import GetStarted from './sections/GetStarted.jsx';
@@ -21,50 +20,27 @@ import Insights from './sections/Insights.jsx';
 import Faq from './sections/Faq.jsx';
 
 export default function Home() {
-  const mainRef = useRef(null);
-  // before paint, and before the theme scripts (App's effect) start
-  useLayoutEffect(() => deferBackgrounds(mainRef.current), []);
-
   return (
-    <div id="pxl-main" ref={mainRef}>
-      <div className="elementor-container">
-        <div className="row pxl-content-wrap no-sidebar">
-          <div id="pxl-content-area" className="pxl-content-area pxl-content-page col-12">
-            <main id="pxl-content-main">
-              <article id="pxl-post-18" className="post-18 page type-page status-publish hentry">
-                <div className="pxl-entry-content clearfix">
-                  <div
-                    data-elementor-type="wp-page"
-                    data-elementor-id="18"
-                    className="elementor elementor-18"
-                    data-elementor-post-type="page"
-                  >
-                    <Hero />
-                    <TrackShipment />
-                    <GetStarted />
-                    <ServicesIntro />
-                    <BusinessServices />
-                    <EcommerceServices />
-                    <IndustriesIntro />
-                    <Industries />
-                    <AboutUs />
-                    <Capacity />
-                    <Expertise />
-                    <DeliveryFlexibility />
-                    <Sustainability />
-                    <RoadFreight />
-                    <Testimonials />
-                    <Partners />
-                    <RequestQuote />
-                    <Insights />
-                    <Faq />
-                  </div>
-                </div>
-              </article>
-            </main>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ThemePage>
+      <Hero />
+      <TrackShipment />
+      <GetStarted />
+      <ServicesIntro />
+      <BusinessServices />
+      <EcommerceServices />
+      <IndustriesIntro />
+      <Industries />
+      <AboutUs />
+      <Capacity />
+      <Expertise />
+      <DeliveryFlexibility />
+      <Sustainability />
+      <RoadFreight />
+      <Testimonials />
+      <Partners />
+      <RequestQuote />
+      <Insights />
+      <Faq />
+    </ThemePage>
   );
 }

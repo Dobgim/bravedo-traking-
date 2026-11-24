@@ -51,7 +51,7 @@ export default function RequestQuote() {
                       <ul></ul>
                     </div>
                     <form
-                      action="https://demo6.atlascargotransit.com/contact/quote"
+                      action="/contact"
                       method="post"
                       className="wpcf7-form init"
                       data-native-form="quote"

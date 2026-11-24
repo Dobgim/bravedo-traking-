@@ -3,7 +3,7 @@ export default function SearchPopup() {
     <div id="pxl-search-popup">
       <div className="pxl-item--overlay"></div>
       <div className="pxl-item--logo">
-        <a href="" title="" rel="home">
+        <a href="/" title="" rel="home">
           <img src="/wp-content/themes/carryon/assets/img/wbx-logo-light.png" alt="" className="logo-light" />
         </a>
       </div>

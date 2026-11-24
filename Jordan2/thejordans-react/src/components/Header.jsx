@@ -164,7 +164,7 @@ export default function Header() {
                       >
                         <div className="elementor-widget-container">
                           <div className="pxl-icon-list pxl-icon1  style-4   " data-wow-delay="ms">
-                            <a className="elementor-repeater-item-0750f53 " href="contact-us/">
+                            <a className="elementor-repeater-item-0750f53 " href="/contact">
                               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
                                 <path
                                   d="M11.7 10.4V6.5C11.7 5.12087 11.1524 3.79799 10.1772 2.8228C9.20201 1.84761 7.87913 1.3 6.5 1.3C5.12087 1.3 3.79799 1.84761 2.8228 2.8228C1.84761 3.79799 1.3 5.12087 1.3 6.5V10.4C1.3 10.759 1.00899 11.05 0.65 11.05C0.291015 11.05 0 10.759 0 10.4V6.5C2.56882e-08 4.77609 0.684676 3.12265 1.90366 1.90366C3.12265 0.684676 4.77609 0 6.5 0C8.22391 0 9.87735 0.684676 11.0963 1.90366C12.3153 3.12265 13 4.77609 13 6.5V10.4C13 10.759 12.709 11.05 12.35 11.05C11.991 11.05 11.7 10.759 11.7 10.4Z"
@@ -197,8 +197,8 @@ export default function Header() {
                       >
                         <div className="elementor-widget-container">
                           <div className="pxl-logo " data-wow-delay="ms">
-                            <a href="">
-                              <img src="/uploads/2026/02/wbx-logo.webp" className="attachment-full" alt="" />
+                            <a href="/">
+                              <img src="/uploads/2026/02/wbx-logo.webp" className="attachment-full" alt="WorldBridgeXpress" />
                             </a>
                           </div>
                         </div>
@@ -218,9 +218,9 @@ export default function Header() {
                               <ul id="menu-menu-primary-has-mega-menu" className="pxl-menu-primary clearfix">
                                 <li
                                   id="menu-item-7827"
-                                  className="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-7827"
+                                  className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-7827"
                                 >
-                                  <a href="https://demo6.atlascargotransit.com">
+                                  <a href="/">
                                     <span className="pxl-menu-item-text">
                                       Home
                                       <i className="caseicon-angle-arrow-down pxl-hide"></i>
@@ -229,7 +229,7 @@ export default function Header() {
                                   </a>
                                 </li>
                                 <li id="menu-item-8284" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8284">
-                                  <a href="https://demo6.atlascargotransit.com/about-us">
+                                  <a href="/about">
                                     <span className="pxl-menu-item-text">
                                       About Us
                                       <i className="caseicon-angle-arrow-down pxl-hide"></i>
@@ -238,7 +238,7 @@ export default function Header() {
                                   </a>
                                 </li>
                                 <li id="menu-item-8293" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8293">
-                                  <a href="https://demo6.atlascargotransit.com/our-services">
+                                  <a href="/services">
                                     <span className="pxl-menu-item-text">
                                       Services
                                       <i className="caseicon-angle-arrow-down pxl-hide"></i>
@@ -247,7 +247,7 @@ export default function Header() {
                                   </a>
                                 </li>
                                 <li id="menu-item-8297" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8297">
-                                  <a href="https://demo6.atlascargotransit.com/blog-standard">
+                                  <a href="/news">
                                     <span className="pxl-menu-item-text">
                                       News
                                       <i className="caseicon-angle-arrow-down pxl-hide"></i>
@@ -265,7 +265,7 @@ export default function Header() {
                                   </a>
                                 </li>
                                 <li id="menu-item-7838" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-7838">
-                                  <a href="https://demo6.atlascargotransit.com/contact-us">
+                                  <a href="/contact">
                                     <span className="pxl-menu-item-text">
                                       Contact Us
                                       <i className="caseicon-angle-arrow-down pxl-hide"></i>
@@ -610,7 +610,7 @@ export default function Header() {
                                                 <label>Remember Me</label>
                                               </div>
                                               <div className="field-forgot-password">
-                                                <a href="my-account/lost-password/">Forgot Password?</a>
+                                                <a href="/admin">Forgot Password?</a>
                                               </div>
                                             </div>
                                             <div className="field-group field-footer-group">
@@ -752,8 +752,8 @@ export default function Header() {
                       >
                         <div className="elementor-widget-container">
                           <div className="pxl-logo " data-wow-delay="ms">
-                            <a href="">
-                              <img src="/uploads/2026/02/wbx-logo.webp" className="attachment-full" alt="" />
+                            <a href="/">
+                              <img src="/uploads/2026/02/wbx-logo.webp" className="attachment-full" alt="WorldBridgeXpress" />
                             </a>
                           </div>
                         </div>
@@ -773,9 +773,9 @@ export default function Header() {
                               <ul id="menu-menu-primary-has-mega-menu-1" className="pxl-menu-primary clearfix">
                                 <li
                                   id="menu-item-7827"
-                                  className="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-7827"
+                                  className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-7827"
                                 >
-                                  <a href="https://demo6.atlascargotransit.com">
+                                  <a href="/">
                                     <span className="pxl-menu-item-text">
                                       Home
                                       <i className="caseicon-angle-arrow-down pxl-hide"></i>
@@ -784,7 +784,7 @@ export default function Header() {
                                   </a>
                                 </li>
                                 <li id="menu-item-8284" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8284">
-                                  <a href="https://demo6.atlascargotransit.com/about-us">
+                                  <a href="/about">
                                     <span className="pxl-menu-item-text">
                                       About Us
                                       <i className="caseicon-angle-arrow-down pxl-hide"></i>
@@ -793,7 +793,7 @@ export default function Header() {
                                   </a>
                                 </li>
                                 <li id="menu-item-8293" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8293">
-                                  <a href="https://demo6.atlascargotransit.com/our-services">
+                                  <a href="/services">
                                     <span className="pxl-menu-item-text">
                                       Services
                                       <i className="caseicon-angle-arrow-down pxl-hide"></i>
@@ -802,7 +802,7 @@ export default function Header() {
                                   </a>
                                 </li>
                                 <li id="menu-item-8297" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8297">
-                                  <a href="https://demo6.atlascargotransit.com/blog-standard">
+                                  <a href="/news">
                                     <span className="pxl-menu-item-text">
                                       News
                                       <i className="caseicon-angle-arrow-down pxl-hide"></i>
@@ -820,7 +820,7 @@ export default function Header() {
                                   </a>
                                 </li>
                                 <li id="menu-item-7838" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-7838">
-                                  <a href="https://demo6.atlascargotransit.com/contact-us">
+                                  <a href="/contact">
                                     <span className="pxl-menu-item-text">
                                       Contact Us
                                       <i className="caseicon-angle-arrow-down pxl-hide"></i>
@@ -1165,7 +1165,7 @@ export default function Header() {
                                                 <label>Remember Me</label>
                                               </div>
                                               <div className="field-forgot-password">
-                                                <a href="my-account/lost-password/">Forgot Password?</a>
+                                                <a href="/admin">Forgot Password?</a>
                                               </div>
                                             </div>
                                             <div className="field-group field-footer-group">
@@ -1280,7 +1280,7 @@ export default function Header() {
             <div className="row">
               <div className="pxl-header-mobile-default">
                 <div className="pxl-header-branding">
-                  <a href="" title="" rel="home">
+                  <a href="/" title="" rel="home">
                     <img src="/wp-content/themes/carryon/assets/img/wbx-logo.png" alt="" />
                   </a>
                 </div>
@@ -1298,7 +1298,7 @@ export default function Header() {
                 <div className="pxl-header-menu-scroll">
                   <div className="pxl-menu-close pxl-hide-xl pxl-close"></div>
                   <div className="pxl-logo-mobile pxl-hide-xl">
-                    <a href="" title="" rel="home">
+                    <a href="/" title="" rel="home">
                       <img src="/wp-content/themes/carryon/assets/img/wbx-logo.png" alt="" />
                     </a>
                   </div>
@@ -1322,24 +1322,24 @@ export default function Header() {
                   <nav className="pxl-header-nav">
                     <ul id="menu-menu-primary-has-mega-menu-2" className="pxl-menu-primary clearfix">
                       <li
-                        className="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-7812"
+                        className="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-7812"
                       >
-                        <a href="https://demo6.atlascargotransit.com">
+                        <a href="/">
                           <span>Home</span>
                         </a>
                       </li>
                       <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8270">
-                        <a href="https://demo6.atlascargotransit.com/about-us">
+                        <a href="/about">
                           <span>About Us</span>
                         </a>
                       </li>
                       <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8265">
-                        <a href="https://demo6.atlascargotransit.com/our-services">
+                        <a href="/services">
                           <span>Services</span>
                         </a>
                       </li>
                       <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8267">
-                        <a href="https://demo6.atlascargotransit.com/blog-standard">
+                        <a href="/news">
                           <span>News</span>
                         </a>
                       </li>
@@ -1349,7 +1349,7 @@ export default function Header() {
                         </a>
                       </li>
                       <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8281">
-                        <a href="https://demo6.atlascargotransit.com/contact-us">
+                        <a href="/contact">
                           <span>Contact Us</span>
                         </a>
                       </li>

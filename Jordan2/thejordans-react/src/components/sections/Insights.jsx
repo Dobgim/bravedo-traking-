@@ -69,20 +69,20 @@ export default function Insights() {
                         <div className="meta-top">
                           <span className="date">{"25/02/26 "}</span>
                           <div className="pxl-post--category">
-                            <a href="https://demo6.atlascargotransit.com/blog-standard" rel="tag">Green Logistics</a>
+                            <a href="/news" rel="tag">Green Logistics</a>
                             {" "}
-                            <a href="https://demo6.atlascargotransit.com/blog-standard" rel="tag">Logistics</a>
+                            <a href="/news" rel="tag">Logistics</a>
                           </div>
                         </div>
                         <h3 className="pxl-post--title ">
-                          <a href="https://demo6.atlascargotransit.com/future-trends-in-e-commerce-fulfillment">{" Future Trends in E-Commerce Fulfillment "}</a>
+                          <a href="/news/future-trends-in-e-commerce-fulfillment">{" Future Trends in E-Commerce Fulfillment "}</a>
                         </h3>
                         <div className="pxl-post--excerpt">
                           {" In modern logistics, efficiency starts with the route. By leveraging real-time data and intelligent planning, businesses can reduce. Lorem ipsum dolor sit amet,... "}
                         </div>
                         <div className="pxl-holder" style={{ backgroundImage: "url(/uploads/2026/02/p9.webp)" }}>
                           <div className="btn-more-wrap">
-                            <a className="btn-more" href="https://demo6.atlascargotransit.com/future-trends-in-e-commerce-fulfillment">
+                            <a className="btn-more" href="/news/future-trends-in-e-commerce-fulfillment">
                               <span>{" Read The Article "}</span>
                               {" "}
                               <span className="icon-post">
@@ -103,18 +103,18 @@ export default function Insights() {
                         <div className="meta-top">
                           <span className="date">{"25/02/26 "}</span>
                           <div className="pxl-post--category">
-                            <a href="https://demo6.atlascargotransit.com/blog-standard" rel="tag">Logistics</a>
+                            <a href="/news" rel="tag">Logistics</a>
                           </div>
                         </div>
                         <h3 className="pxl-post--title ">
-                          <a href="https://demo6.atlascargotransit.com/urban-vs-regional-delivery-strategies">{" Urban vs Regional Delivery Strategies "}</a>
+                          <a href="/news/urban-vs-regional-delivery-strategies">{" Urban vs Regional Delivery Strategies "}</a>
                         </h3>
                         <div className="pxl-post--excerpt">
                           {" In modern logistics, efficiency starts with the route. By leveraging real-time data and intelligent planning, businesses can reduce. Lorem ipsum dolor sit amet,... "}
                         </div>
                         <div className="pxl-holder" style={{ backgroundImage: "url(/uploads/2026/02/p8.webp)" }}>
                           <div className="btn-more-wrap">
-                            <a className="btn-more" href="https://demo6.atlascargotransit.com/urban-vs-regional-delivery-strategies">
+                            <a className="btn-more" href="/news/urban-vs-regional-delivery-strategies">
                               <span>{" Read The Article "}</span>
                               {" "}
                               <span className="icon-post">
@@ -135,18 +135,18 @@ export default function Insights() {
                         <div className="meta-top">
                           <span className="date">{"25/02/26 "}</span>
                           <div className="pxl-post--category">
-                            <a href="https://demo6.atlascargotransit.com/blog-standard" rel="tag">Smart Routing</a>
+                            <a href="/news" rel="tag">Smart Routing</a>
                           </div>
                         </div>
                         <h3 className="pxl-post--title ">
-                          <a href="https://demo6.atlascargotransit.com/solving-last-mile-delivery-challenges-2">{" Solving Last-Mile Delivery Challenges "}</a>
+                          <a href="/news/solving-last-mile-delivery-challenges-2">{" Solving Last-Mile Delivery Challenges "}</a>
                         </h3>
                         <div className="pxl-post--excerpt">
                           {" In modern logistics, efficiency starts with the route. By leveraging real-time data and intelligent planning, businesses can reduce. Lorem ipsum dolor sit amet,... "}
                         </div>
                         <div className="pxl-holder" style={{ backgroundImage: "url(/uploads/2026/02/p6.webp)" }}>
                           <div className="btn-more-wrap">
-                            <a className="btn-more" href="https://demo6.atlascargotransit.com/solving-last-mile-delivery-challenges-2">
+                            <a className="btn-more" href="/news/solving-last-mile-delivery-challenges-2">
                               <span>{" Read The Article "}</span>
                               {" "}
                               <span className="icon-post">
@@ -167,11 +167,11 @@ export default function Insights() {
                         <div className="meta-top">
                           <span className="date">{"25/02/26 "}</span>
                           <div className="pxl-post--category">
-                            <a href="https://demo6.atlascargotransit.com/blog-standard" rel="tag">Customer Experience</a>
+                            <a href="/news" rel="tag">Customer Experience</a>
                           </div>
                         </div>
                         <h3 className="pxl-post--title ">
-                          <a href="https://demo6.atlascargotransit.com/the-role-of-technology-in-optimizing-fulfillment-operations">{" The Role of Technology in Optimizing Fulfillment Operations "}</a>
+                          <a href="/news/the-role-of-technology-in-optimizing-fulfillment-operations">{" The Role of Technology in Optimizing Fulfillment Operations "}</a>
                         </h3>
                         <div className="pxl-post--excerpt">
                           {" In modern logistics, efficiency starts with the route. By leveraging real-time data and intelligent planning, businesses can reduce. Lorem ipsum dolor sit amet,... "}
@@ -180,7 +180,7 @@ export default function Insights() {
                           <div className="btn-more-wrap">
                             <a
                               className="btn-more"
-                              href="https://demo6.atlascargotransit.com/the-role-of-technology-in-optimizing-fulfillment-operations"
+                              href="/news/the-role-of-technology-in-optimizing-fulfillment-operations"
                             >
                               <span>{" Read The Article "}</span>
                               {" "}
@@ -202,18 +202,18 @@ export default function Insights() {
                         <div className="meta-top">
                           <span className="date">{"25/02/26 "}</span>
                           <div className="pxl-post--category">
-                            <a href="https://demo6.atlascargotransit.com/blog-standard" rel="tag">Sustainability</a>
+                            <a href="/news" rel="tag">Sustainability</a>
                           </div>
                         </div>
                         <h3 className="pxl-post--title ">
-                          <a href="https://demo6.atlascargotransit.com/solving-last-mile-delivery-challenges">{" Solving Last-Mile Delivery Challenges "}</a>
+                          <a href="/news/solving-last-mile-delivery-challenges">{" Solving Last-Mile Delivery Challenges "}</a>
                         </h3>
                         <div className="pxl-post--excerpt">
                           {" In modern logistics, efficiency starts with the route. By leveraging real-time data and intelligent planning, businesses can reduce. Lorem ipsum dolor sit amet,... "}
                         </div>
                         <div className="pxl-holder" style={{ backgroundImage: "url(/uploads/2026/02/p5.webp)" }}>
                           <div className="btn-more-wrap">
-                            <a className="btn-more" href="https://demo6.atlascargotransit.com/solving-last-mile-delivery-challenges">
+                            <a className="btn-more" href="/news/solving-last-mile-delivery-challenges">
                               <span>{" Read The Article "}</span>
                               {" "}
                               <span className="icon-post">
@@ -234,11 +234,11 @@ export default function Insights() {
                         <div className="meta-top">
                           <span className="date">{"25/02/26 "}</span>
                           <div className="pxl-post--category">
-                            <a href="https://demo6.atlascargotransit.com/blog-standard" rel="tag">Transports</a>
+                            <a href="/news" rel="tag">Transports</a>
                           </div>
                         </div>
                         <h3 className="pxl-post--title ">
-                          <a href="https://demo6.atlascargotransit.com/what-customers-expect-from-fast-delivery-today-2">{" What Customers Expect From Fast Delivery Today "}</a>
+                          <a href="/news/what-customers-expect-from-fast-delivery-today-2">{" What Customers Expect From Fast Delivery Today "}</a>
                         </h3>
                         <div className="pxl-post--excerpt">
                           {" In modern logistics, efficiency starts with the route. By leveraging real-time data and intelligent planning, businesses can reduce. Lorem ipsum dolor sit amet,... "}
@@ -247,7 +247,7 @@ export default function Insights() {
                           <div className="btn-more-wrap">
                             <a
                               className="btn-more"
-                              href="https://demo6.atlascargotransit.com/what-customers-expect-from-fast-delivery-today-2"
+                              href="/news/what-customers-expect-from-fast-delivery-today-2"
                             >
                               <span>{" Read The Article "}</span>
                               {" "}

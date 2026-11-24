@@ -57,7 +57,7 @@ export default function Industries() {
                         <img loading="lazy" decoding="async" width="39" height="27" src="/uploads/2026/02/id1.svg" className="attachment-full" alt="" />
                       </div>
                       <h3 className="pxl-post--title">
-                        <a href="https://demo6.atlascargotransit.com/our-services">Fashion &amp; Apparel</a>
+                        <a href="/services">Fashion &amp; Apparel</a>
                       </h3>
                       <span className="pxl-post--content">
                         {" Reliable logistics for fashion brands managing seasonal collections, high inventory turnover, and time-sensitive deliveries across multiple channels. "}
@@ -70,7 +70,7 @@ export default function Industries() {
                         <img loading="lazy" decoding="async" width="38" height="34" src="/uploads/2026/02/id3.svg" className="attachment-full" alt="" />
                       </div>
                       <h3 className="pxl-post--title">
-                        <a href="https://demo6.atlascargotransit.com/our-services">Fresh Produce &amp; Agriculture</a>
+                        <a href="/services">Fresh Produce &amp; Agriculture</a>
                       </h3>
                       <span className="pxl-post--content">
                         {" Reliable logistics for fashion brands managing seasonal collections, high inventory turnover, and time-sensitive deliveries across multiple channels. "}
@@ -83,7 +83,7 @@ export default function Industries() {
                         <img loading="lazy" decoding="async" width="31" height="36" src="/uploads/2026/02/id4.svg" className="attachment-full" alt="" />
                       </div>
                       <h3 className="pxl-post--title">
-                        <a href="https://demo6.atlascargotransit.com/our-services">Healthcare &amp; Pharmaceuticals</a>
+                        <a href="/services">Healthcare &amp; Pharmaceuticals</a>
                       </h3>
                       <span className="pxl-post--content">
                         {" Reliable logistics for fashion brands managing seasonal collections, high inventory turnover, and time-sensitive deliveries across multiple channels. "}
@@ -96,7 +96,7 @@ export default function Industries() {
                         <img loading="lazy" decoding="async" width="30" height="30" src="/uploads/2026/02/id2.svg" className="attachment-full" alt="" />
                       </div>
                       <h3 className="pxl-post--title">
-                        <a href="https://demo6.atlascargotransit.com/our-services">Electronics &amp; Technology</a>
+                        <a href="/services">Electronics &amp; Technology</a>
                       </h3>
                       <span className="pxl-post--content">
                         {" Reliable logistics for fashion brands managing seasonal collections, high inventory turnover, and time-sensitive deliveries across multiple channels. "}

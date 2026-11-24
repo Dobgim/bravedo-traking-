@@ -102,7 +102,7 @@ export default function GetStarted() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-ae54eb1-1402" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="contact-us/"
+                    href="/contact"
                     className="btn  btn-default  style-icon  pxl-icon--right"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"
@@ -218,7 +218,7 @@ export default function GetStarted() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-ab99da6-3310" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="contact-us"
+                    href="/contact"
                     className="btn  btn-default  style-icon  pxl-icon--right"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"
@@ -334,7 +334,7 @@ export default function GetStarted() {
               <div className="elementor-widget-container">
                 <div id="pxl-pxl_button-8725b7a-2115" className="pxl-button pxl-atc-link " data-wow-delay="ms">
                   <a
-                    href="blog-standard/"
+                    href="/news"
                     className="btn  btn-default  style-icon  pxl-icon--right"
                     data-wow-delay="ms"
                     data-target=".pxl-page-popup-template-0"
