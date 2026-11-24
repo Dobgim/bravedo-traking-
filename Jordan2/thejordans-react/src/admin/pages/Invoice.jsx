@@ -23,7 +23,14 @@ export default function Invoice() {
     };
   }, [id]);
 
-  const trackUrl = data ? `${window.location.origin}/track?code=${encodeURIComponent(data.shipment.trackingNumber)}` : '';
+  // The QR code always points at the public website (Admin -> Settings ->
+  // website), even when the dashboard is opened from another address.
+  const site = (() => {
+    const w = String(data?.settings?.company_website || '').trim().replace(/\/+$/, '');
+    if (!w) return window.location.origin;
+    return /^https?:\/\//i.test(w) ? w : `https://${w}`;
+  })();
+  const trackUrl = data ? `${site}/track?code=${encodeURIComponent(data.shipment.trackingNumber)}` : '';
 
   useEffect(() => {
     if (!trackUrl) return;
