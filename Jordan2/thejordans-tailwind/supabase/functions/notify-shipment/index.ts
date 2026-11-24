@@ -122,7 +122,7 @@ Deno.serve(async (req) => {
   // give the dashboard a moment to save the tracking events that go with the change
   if (!resend) await new Promise((r) => setTimeout(r, 4000));
 
-  const [{ data: s }, { data: co }, { data: ev }, { data: past }] = await Promise.all([
+  const [{ data: s, error: shipmentError }, { data: co }, { data: ev }, { data: past }] = await Promise.all([
     db.from('shipments').select('*').eq('id', shipment_id).maybeSingle(),
     db.from('settings').select('*').eq('id', 1).maybeSingle(),
     db.from('shipment_events').select('location, note').eq('shipment_id', shipment_id).order('date', { ascending: false }).order('created_at', { ascending: false }).limit(1),
@@ -130,6 +130,7 @@ Deno.serve(async (req) => {
       ? db.from('email_log').select('id, recipient, kind, ok, created_at').eq('shipment_id', shipment_id).order('created_at', { ascending: true })
       : Promise.resolve({ data: [] as any[] }),
   ]);
+  if (shipmentError) return reply({ error: 'database error: ' + shipmentError.message }, 500);
   if (!s) return reply({ error: 'shipment not found' }, 404);
   const company = co ?? {};
   const site = String(company.company_website || 'https://worldbridgexpress.com').replace(/\/+$/, '');
@@ -193,6 +194,10 @@ Deno.serve(async (req) => {
     port,
     secure: port === 465,
     auth: { user: env('SMTP_USER'), pass: env('SMTP_PASS') },
+    // fail with a logged reason instead of hanging until the function is killed
+    connectionTimeout: 15000,
+    greetingTimeout: 15000,
+    socketTimeout: 30000,
   });
   const from = `"${String(company.company_name || 'WorldBridgeXpress').replace(/"/g, '')}" <${env('SMTP_FROM') || env('SMTP_USER')}>`;
   const instructionSubject = subjectFor('delivery_instruction');
