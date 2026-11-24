@@ -53,6 +53,10 @@ export const fromRow = (r) => ({
   receiver: r.receiver || {},
   notes: r.notes || '',
   invoice: r.invoice || {},
+  amountDue: numOrNull(r.amount_due),
+  clearanceNote: r.clearance_note || '',
+  deliveryInstruction: r.delivery_instruction || '',
+  deliveryInstructionNote: r.delivery_instruction_note || '',
   createdAt: r.created_at,
   updatedAt: r.updated_at,
   events: (r.shipment_events || [])
@@ -83,6 +87,8 @@ const toRow = (s) => ({
   receiver: s.receiver || {},
   notes: s.notes || '',
   invoice: s.invoice || {},
+  amount_due: numOrNull(s.amountDue),
+  clearance_note: (s.clearanceNote || '').trim(),
 });
 
 export async function listShipments() {
@@ -243,4 +249,30 @@ export async function changePassword(email, currentPassword, newPassword) {
   if (check.error) throw new Error('Your current password is incorrect.');
   const { error } = await database().auth.updateUser({ password: newPassword });
   if (error) throw friendlyError(error);
+}
+
+/* ---------------- email notifications ---------------- */
+export async function listEmailLog(shipmentId) {
+  return must(
+    await database().from('email_log').select('*').eq('shipment_id', shipmentId).order('created_at', { ascending: false }).limit(25)
+  ).map((r) => ({ id: r.id, recipient: r.recipient, subject: r.subject, kind: r.kind, ok: r.ok, error: r.error, createdAt: r.created_at }));
+}
+
+/**
+ * Asks the notify-shipment function to email the sender and receiver now:
+ *   'reminder' - a reminder with the current status (and any amount due)
+ *   'resend'   - only to people whose last email failed
+ */
+export async function notifyShipment(shipmentId, type) {
+  const { data, error } = await database().functions.invoke('notify-shipment', { body: { type, shipment_id: shipmentId } });
+  if (error) {
+    let msg = error.message;
+    try {
+      msg = (await error.context.json()).error || msg;
+    } catch {
+      /* not a JSON error body */
+    }
+    throw friendlyError({ message: msg });
+  }
+  return data;
 }

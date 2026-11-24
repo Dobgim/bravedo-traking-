@@ -3,7 +3,17 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import ShipmentMap from '../../components/ShipmentMap.jsx';
 import { DEFAULT_SPEEDS, formatKm } from '../../lib/tracking.js';
 import { useResource } from '../api.js';
-import { addEvent, createShipment, deleteEvent, deleteShipment, getSettings, getShipment, updateShipment } from '../data.js';
+import {
+  addEvent,
+  createShipment,
+  deleteEvent,
+  deleteShipment,
+  getSettings,
+  getShipment,
+  listEmailLog,
+  notifyShipment,
+  updateShipment,
+} from '../data.js';
 import { computeInvoice, formatMoney, normaliseInvoice } from '../invoice.js';
 import { locateRoute } from '../route.js';
 import { ErrorBox, FREIGHT_TYPES, Icon, Loading, PageHeader, SERVICES, STATUSES, StatusBadge, formatDate } from '../ui.jsx';
@@ -44,8 +54,10 @@ const EMPTY = {
   departureAt: '',
   speedKmh: DEFAULT_SPEEDS['Truck Freight'],
   notes: '',
+  amountDue: '',
+  clearanceNote: '',
   sender: { name: '', phone: '', email: '' },
-  receiver: { name: '', phone: '', email: '', address: '' },
+  receiver: { name: '', phone: '', email: '', address: '', postalCode: '' },
   invoice: null, // filled from Settings once they load
 };
 
@@ -62,6 +74,8 @@ const toForm = (s) => ({
   departureAt: toLocalInput(s.departureAt),
   speedKmh: s.speedKmh ?? DEFAULT_SPEEDS[s.freightType] ?? 60,
   notes: s.notes || '',
+  amountDue: s.amountDue ?? '',
+  clearanceNote: s.clearanceNote || '',
   sender: { ...EMPTY.sender, ...s.sender },
   receiver: { ...EMPTY.receiver, ...s.receiver },
   invoice: {
@@ -360,6 +374,32 @@ export default function ShipmentForm() {
 
           <section className="card">
             <div className="card__head">
+              <h2>Clearance</h2>
+              {Number(form.amountDue) > 0 ? <span className="badge badge--bad">Shown on tracking page</span> : <span className="muted small">Optional</span>}
+            </div>
+            <div className="card__body form-grid">
+              <label className="field">
+                <span>Amount due ({invoiceOf(form).currency || settings?.currency || 'USD'})</span>
+                <input type="number" min="0" step="0.01" value={form.amountDue} onChange={set('amountDue')} placeholder="e.g. 255.00" />
+              </label>
+              <label className="field span-2">
+                <span>Clearance requirements</span>
+                <textarea
+                  value={form.clearanceNote}
+                  onChange={set('clearanceNote')}
+                  maxLength={1000}
+                  placeholder="Outstanding payment required to release this shipment."
+                />
+              </label>
+              <p className="form-note span-2">
+                While an amount is set, the tracking page shows a <strong>Clearance Required</strong> box with this message, the amount and
+                a Contact Support button, and the emails mention it. Clear the amount (leave it empty) to remove it.
+              </p>
+            </div>
+          </section>
+
+          <section className="card">
+            <div className="card__head">
               <h2>Route &amp; movement</h2>
               {shipment?.routeDistanceKm ? (
                 <span className="muted small">
@@ -439,6 +479,10 @@ export default function ShipmentForm() {
                 <label className="field">
                   <span>Delivery address</span>
                   <input value={form.receiver.address} onChange={setParty('receiver', 'address')} />
+                </label>
+                <label className="field">
+                  <span>Postal code</span>
+                  <input value={form.receiver.postalCode} onChange={setParty('receiver', 'postalCode')} autoComplete="off" placeholder="e.g. 60606" />
                 </label>
               </div>
             </section>
@@ -590,6 +634,8 @@ export default function ShipmentForm() {
           <aside className="stack">
             <TrackingCode shipment={shipment} />
 
+            <EmailNotifications shipment={shipment} />
+
             <section className="card">
               <div className="card__head">
                 <h2>Live position</h2>
@@ -654,6 +700,114 @@ function TrackingCode({ shipment }) {
             Invoice
           </Link>
         </div>
+      </div>
+    </section>
+  );
+}
+
+/*
+ * Emails to the sender and receiver: sent automatically on create / status
+ * change (and to the company when the receiver saves delivery instructions).
+ * "Send reminder" emails both parties now; "Resend failed" retries the people
+ * whose last email did not go out.
+ */
+function EmailNotifications({ shipment }) {
+  const [rows, setRows] = useState(null);
+  const [busy, setBusy] = useState('');
+  const [notice, setNotice] = useState(null);
+
+  const load = () => listEmailLog(shipment.id).then(setRows).catch(() => setRows([]));
+
+  useEffect(() => {
+    let active = true;
+    const refresh = () =>
+      listEmailLog(shipment.id)
+        .then((r) => active && setRows(r))
+        .catch(() => active && setRows([]));
+    refresh();
+    // automatic emails go out a few seconds after a change
+    const timer = setTimeout(refresh, 9000);
+    return () => {
+      active = false;
+      clearTimeout(timer);
+    };
+  }, [shipment.id, shipment.status]);
+
+  const latest = new Map();
+  for (const r of rows || []) {
+    if (r.kind === 'delivery_instruction') continue;
+    const key = r.recipient.toLowerCase();
+    if (!latest.has(key)) latest.set(key, r);
+  }
+  const failed = [...latest.values()].filter((r) => !r.ok).length;
+  const hasRecipients = [shipment.sender?.email, shipment.receiver?.email].some((e) => /\S+@\S+\.\S+/.test(String(e || '')));
+
+  const run = (type) => async () => {
+    if (type === 'reminder' && !window.confirm('Email a reminder with the current status to the sender and receiver now?')) return;
+    setBusy(type);
+    setNotice(null);
+    try {
+      const res = await notifyShipment(shipment.id, type);
+      const n = res?.sent || 0;
+      if (n && !res.failed) setNotice({ ok: true, text: `Sent ${n} email${n > 1 ? 's' : ''}.` });
+      else if (n) setNotice({ ok: false, text: `Sent ${n}, ${res.failed} failed: ${res.error || 'unknown error'}` });
+      else if (res?.failed) setNotice({ ok: false, text: `Could not send: ${res.error || 'unknown error'}` });
+      else setNotice({ ok: true, text: type === 'resend' ? 'Nothing to resend.' : 'No sender or receiver email address to send to.' });
+    } catch (err) {
+      setNotice({ ok: false, text: err.message });
+    } finally {
+      setBusy('');
+      load();
+    }
+  };
+
+  return (
+    <section className="card">
+      <div className="card__head">
+        <h2>Email notifications</h2>
+        <span className="muted small">Sender &amp; receiver</span>
+      </div>
+      <div className="card__body">
+        <div className="tracking-code__actions" style={{ marginTop: 0, marginBottom: 12 }}>
+          <button type="button" className="btn btn--primary btn--sm" onClick={run('reminder')} disabled={!!busy || !hasRecipients}>
+            <Icon name="mail" size={14} />
+            {busy === 'reminder' ? 'Sending…' : 'Send reminder'}
+          </button>
+          <button type="button" className="btn btn--ghost btn--sm" onClick={run('resend')} disabled={!!busy || failed === 0}>
+            {busy === 'resend' ? 'Sending…' : `Resend failed${failed ? ` (${failed})` : ''}`}
+          </button>
+        </div>
+        {!hasRecipients && <p className="form-note">Add a sender or receiver email address to send notifications.</p>}
+        {notice && (
+          <p className="small" role="status" style={{ margin: '0 0 8px', color: notice.ok ? '#0a7a3d' : 'var(--bad, #c2000a)' }}>
+            {notice.text}
+          </p>
+        )}
+        {rows === null ? (
+          <Loading />
+        ) : rows.length === 0 ? (
+          <p className="form-note">Emails are sent automatically when the shipment is created and whenever its status changes.</p>
+        ) : (
+          <ul className="list" style={{ padding: 0, margin: 0 }}>
+            {rows.slice(0, 8).map((r) => (
+              <li key={r.id} style={{ padding: '9px 0', display: 'flex', justifyContent: 'space-between', gap: 10 }}>
+                <div style={{ minWidth: 0 }}>
+                  <div className="strong" style={{ overflowWrap: 'anywhere' }}>{r.recipient}</div>
+                  <div className="muted small">{r.subject}</div>
+                  {!r.ok && r.error && (
+                    <div className="small" style={{ color: 'var(--bad, #c2000a)' }}>
+                      {r.error}
+                    </div>
+                  )}
+                </div>
+                <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                  <span className={`badge badge--${r.ok ? 'ok' : 'bad'}`}>{r.ok ? 'Sent' : 'Not sent'}</span>
+                  <div className="muted small">{formatDate(r.createdAt)}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

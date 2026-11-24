@@ -39,6 +39,15 @@ function fmtDate(v?: string | null) {
   return Number.isNaN(d.getTime()) ? v : d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 }
 
+function money(v: unknown, currency = 'USD') {
+  const n = Number(v);
+  try {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(n);
+  } catch {
+    return `${currency} ${n.toFixed(2)}`;
+  }
+}
+
 function emailHtml(o: {
   heading: string;
   intro: string;
@@ -60,6 +69,8 @@ function emailHtml(o: {
     ['Weight', s.weight],
     ['Expected delivery', [fmtDate(s.estimated_delivery), s.estimated_delivery_time].filter(Boolean).join(', ')],
     ['Latest update', [o.latest?.location, o.latest?.note].filter(Boolean).join(' — ')],
+    ['Amount due (clearance)', Number(s.amount_due) > 0 ? money(s.amount_due, s.invoice?.currency || 'USD') : ''],
+    ['Clearance', Number(s.amount_due) > 0 ? s.clearance_note || 'Outstanding payment required to release this shipment.' : ''],
   ].filter(([, v]) => v);
   const contact = [co.company_phone, co.company_email].filter(Boolean).map(esc).join(' &nbsp;·&nbsp; ');
   return `<!doctype html><html><body style="margin:0;background:#f3f3f6;font-family:Arial,Helvetica,sans-serif;color:#11194e">
@@ -116,11 +127,13 @@ Deno.serve(async (req) => {
   const secret = env('NOTIFY_WEBHOOK_SECRET');
   const fromTrigger = !!secret && req.headers.get('x-webhook-secret') === secret;
   const resend = type === 'resend';
-  if (!(fromTrigger || (resend && (await isAdminRequest(req))))) return reply({ error: 'forbidden' }, 403);
+  // "Send reminder" in the dashboard: one up-to-date email to sender and receiver
+  const reminder = type === 'reminder';
+  if (!(fromTrigger || ((resend || reminder) && (await isAdminRequest(req))))) return reply({ error: 'forbidden' }, 403);
   if (!shipment_id) return reply({ error: 'missing shipment' }, 400);
 
   // give the dashboard a moment to save the tracking events that go with the change
-  if (!resend) await new Promise((r) => setTimeout(r, 4000));
+  if (fromTrigger) await new Promise((r) => setTimeout(r, 4000));
 
   const [{ data: s, error: shipmentError }, { data: co }, { data: ev }, { data: past }] = await Promise.all([
     db.from('shipments').select('*').eq('id', shipment_id).maybeSingle(),
@@ -160,7 +173,8 @@ Deno.serve(async (req) => {
     });
     if (!unique.length && !resendInstruction) return reply({ sent: 0, failed: 0, reason: 'nothing to resend' });
   }
-  const kindFor = (email: string): 'created' | 'status' => {
+  const kindFor = (email: string): 'created' | 'status' | 'reminder' => {
+    if (reminder) return 'reminder';
     if (!resend) return type === 'created' ? 'created' : 'status';
     return history(email).some((p: any) => p.kind === 'created' && p.ok) ? 'status' : 'created';
   };
@@ -169,7 +183,11 @@ Deno.serve(async (req) => {
       ? `Shipment ${s.tracking_number} created — ${s.origin} to ${s.destination}`
       : kind === 'delivery_instruction'
         ? `Delivery instruction for shipment ${s.tracking_number}`
-        : `Shipment ${s.tracking_number} is now ${s.status}`;
+        : kind === 'reminder'
+          ? Number(s.amount_due) > 0
+            ? `Reminder: payment required to release shipment ${s.tracking_number}`
+            : `Reminder: shipment ${s.tracking_number} is ${s.status}`
+          : `Shipment ${s.tracking_number} is now ${s.status}`;
 
   const log = (to: string, kind: string, ok: boolean, error = '') =>
     db.from('email_log').insert({ shipment_id, recipient: to, subject: subjectFor(kind), kind, ok, error: error.slice(0, 500) });
@@ -242,16 +260,22 @@ Deno.serve(async (req) => {
     const kind = kindFor(r.email);
     const created = kind === 'created';
     const subject = subjectFor(kind);
+    const due = Number(s.amount_due) > 0
+      ? ` <strong>An outstanding clearance payment of ${esc(money(s.amount_due, s.invoice?.currency || 'USD'))} is required to release it.</strong> Please contact our support team to arrange payment.`
+      : '';
     const intro = created
       ? `A new shipment ${r.role === 'sender' ? 'you are sending' : 'addressed to you'} has been created. Your tracking number is <strong>${esc(s.tracking_number)}</strong>.`
-      : `Your shipment <strong>${esc(s.tracking_number)}</strong> ${esc(STATUS_TEXT[s.status] || `is now ${s.status}.`)}`;
+      : kind === 'reminder'
+        ? `This is a reminder about your shipment <strong>${esc(s.tracking_number)}</strong>, which ${esc(STATUS_TEXT[s.status] || `is ${s.status}.`)}${due}`
+        : `Your shipment <strong>${esc(s.tracking_number)}</strong> ${esc(STATUS_TEXT[s.status] || `is now ${s.status}.`)}${due}`;
+    const heading = created ? 'Your shipment has been created' : kind === 'reminder' ? `Reminder: ${s.status}` : `Status update: ${s.status}`;
     try {
       await transport.sendMail({
         from,
         to: r.email,
         replyTo: company.company_email || undefined,
         subject,
-        html: emailHtml({ heading: created ? 'Your shipment has been created' : `Status update: ${s.status}`, intro, s, role: r.role, name: r.name, trackUrl, latest, co: company }),
+        html: emailHtml({ heading, intro, s, role: r.role, name: r.name, trackUrl, latest, co: company }),
         text: `${subject}\n\nTrack it live: ${trackUrl}`,
       });
       sent++;

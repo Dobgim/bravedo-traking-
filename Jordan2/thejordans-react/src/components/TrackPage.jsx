@@ -238,7 +238,13 @@ export default function TrackPage() {
               </div>
               <span className="tjt-muted">Updated {formatDate(state.shipment.updatedAt, true)} · refreshes automatically</span>
             </header>
-            <ShipmentResult shipment={state.shipment} mapsKey={settings ? settings.googleMapsApiKey || '' : null} clockOffset={clockOffset} />
+            <ShipmentResult
+              shipment={state.shipment}
+              mapsKey={settings ? settings.googleMapsApiKey || '' : null}
+              clockOffset={clockOffset}
+              settings={settings}
+              onShipmentChange={(shipment) => setState({ shipment })}
+            />
           </article>
         )}
 

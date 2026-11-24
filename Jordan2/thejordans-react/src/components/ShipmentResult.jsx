@@ -1,4 +1,5 @@
 import ShipmentMap from './ShipmentMap.jsx';
+import { ClearanceNotice, DeliveryInstructions } from './TrackExtras.jsx';
 
 /* Tracking details for one shipment: status, route, live map, progress and history. */
 
@@ -17,7 +18,7 @@ export const formatDate = (iso, withTime = false) => {
   });
 };
 
-export default function ShipmentResult({ shipment, mapsKey, clockOffset = 0 }) {
+export default function ShipmentResult({ shipment, mapsKey, clockOffset = 0, settings, onShipmentChange }) {
   const lastRegular = shipment.events.find((e) => STEPS.includes(e.status))?.status;
   const currentStep = STEPS.indexOf(STEPS.includes(shipment.status) ? shipment.status : lastRegular || 'Label Created');
   const exception = !STEPS.includes(shipment.status);
@@ -74,6 +75,8 @@ export default function ShipmentResult({ shipment, mapsKey, clockOffset = 0 }) {
         ))}
       </ol>
 
+      <ClearanceNotice shipment={shipment} settings={settings} />
+
       {(shipment.freightType || shipment.weight || shipment.service) && (
         <dl className="tjt-facts">
           {shipment.freightType && (
@@ -96,6 +99,8 @@ export default function ShipmentResult({ shipment, mapsKey, clockOffset = 0 }) {
           )}
         </dl>
       )}
+
+      <DeliveryInstructions shipment={shipment} onSaved={(saved) => onShipmentChange?.({ ...shipment, ...saved })} />
 
       <h4 className="tjt-subhead">Tracking history</h4>
       <ol className="tjt-timeline">

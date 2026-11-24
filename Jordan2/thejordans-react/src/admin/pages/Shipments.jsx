@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useResource } from '../api.js';
-import { deleteShipment, listShipments } from '../data.js';
+import { deleteShipment, listShipments, notifyShipment } from '../data.js';
 import { EmptyState, ErrorBox, Icon, Loading, PageHeader, STATUSES, StatusBadge, formatDate } from '../ui.jsx';
 
 export default function Shipments() {
@@ -10,6 +10,28 @@ export default function Shipments() {
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('');
   const [actionError, setActionError] = useState('');
+  const [reminding, setReminding] = useState('');
+
+  // "Send reminder": emails the current status (and any amount due) to sender and receiver
+  const remind = async (e, s) => {
+    e.stopPropagation();
+    const to = [s.sender?.email, s.receiver?.email].filter((x) => /\S+@\S+\.\S+/.test(String(x || '')));
+    if (!to.length) {
+      window.alert(`${s.trackingNumber} has no sender or receiver email address. Add one on the shipment first.`);
+      return;
+    }
+    if (!window.confirm(`Email a reminder for ${s.trackingNumber} to ${[...new Set(to)].join(' and ')}?`)) return;
+    setReminding(s.id);
+    try {
+      const res = await notifyShipment(s.id, 'reminder');
+      if (res?.sent && !res.failed) window.alert(`Reminder sent (${res.sent} email${res.sent > 1 ? 's' : ''}).`);
+      else window.alert(`The reminder could not be sent: ${res?.error || 'unknown error'}`);
+    } catch (err) {
+      window.alert(`The reminder could not be sent: ${err.message}`);
+    } finally {
+      setReminding('');
+    }
+  };
 
   const shipments = data || [];
 
@@ -153,6 +175,16 @@ export default function Shipments() {
                       >
                         <Icon name="quote" size={16} />
                       </Link>
+                      <button
+                        type="button"
+                        className="icon-btn"
+                        onClick={(e) => remind(e, s)}
+                        disabled={reminding === s.id}
+                        aria-label={`Send reminder email for ${s.trackingNumber}`}
+                        title="Send reminder email to sender & receiver"
+                      >
+                        <Icon name="mail" size={16} />
+                      </button>
                       <Link
                         to={`/shipments/${s.id}`}
                         className="icon-btn"

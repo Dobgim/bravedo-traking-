@@ -31,6 +31,19 @@ async function rpc(fn, args) {
 /** Shipment for a tracking number, or null when unknown. */
 export const trackShipment = (code) => rpc('track_shipment', { p_code: code });
 
+/** Saves the receiver's delivery instruction (the database then emails the company). */
+export async function saveDeliveryInstruction(code, instruction, note = '') {
+  const data = await rpc('save_delivery_instruction', { p_code: code, p_instruction: instruction, p_note: note });
+  const messages = {
+    not_found: 'This shipment could not be found.',
+    shipment_closed: 'Delivery instructions can no longer be changed for this shipment.',
+    invalid_instruction: 'Please select a valid delivery instruction.',
+    invalid_note: 'Please add delivery details (up to 500 characters) for Other.',
+  };
+  if (data?.error) throw new Error(messages[data.error] || 'Could not save your delivery instructions. Please try again.');
+  return data;
+}
+
 /** Invoice charges for a tracking number (items, tax, payments), or null. */
 export const getShipmentInvoice = (code) => rpc('shipment_invoice', { p_code: code });
 
