@@ -198,7 +198,7 @@ export default function Header() {
                         <div className="elementor-widget-container">
                           <div className="pxl-logo " data-wow-delay="ms">
                             <a href="">
-                              <img src="/uploads/2026/02/logo.webp" className="attachment-full" alt="" />
+                              <img src="/uploads/2026/02/wbx-logo.webp" className="attachment-full" alt="" />
                             </a>
                           </div>
                         </div>
@@ -753,7 +753,7 @@ export default function Header() {
                         <div className="elementor-widget-container">
                           <div className="pxl-logo " data-wow-delay="ms">
                             <a href="">
-                              <img src="/uploads/2026/02/logo.webp" className="attachment-full" alt="" />
+                              <img src="/uploads/2026/02/wbx-logo.webp" className="attachment-full" alt="" />
                             </a>
                           </div>
                         </div>
@@ -1281,7 +1281,7 @@ export default function Header() {
               <div className="pxl-header-mobile-default">
                 <div className="pxl-header-branding">
                   <a href="" title="" rel="home">
-                    <img src="/wp-content/themes/carryon/assets/img/logo.png" alt="" />
+                    <img src="/wp-content/themes/carryon/assets/img/wbx-logo.png" alt="" />
                   </a>
                 </div>
                 <div id="pxl-nav-mobile">
@@ -1299,7 +1299,7 @@ export default function Header() {
                   <div className="pxl-menu-close pxl-hide-xl pxl-close"></div>
                   <div className="pxl-logo-mobile pxl-hide-xl">
                     <a href="" title="" rel="home">
-                      <img src="/wp-content/themes/carryon/assets/img/logo.png" alt="" />
+                      <img src="/wp-content/themes/carryon/assets/img/wbx-logo.png" alt="" />
                     </a>
                   </div>
                   <div className="pxl-header-mobile-search pxl-hide-xl">

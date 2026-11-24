@@ -5,9 +5,9 @@ and "1" from the original logo) plus the company name.
   python tools/make-logo.py
 
 Writes, at the same sizes as before so no layout changes:
-  public/uploads/2026/02/logo.webp, logo-light.webp       722x206
-  public/wp-content/themes/carryon/assets/img/logo.png, logo-light.png
-  public/admin-icons/*.png                                 app icons
+  public/uploads/2026/02/wbx-logo.webp, wbx-logo-light.webp   722x206
+  public/wp-content/themes/carryon/assets/img/wbx-logo.png, wbx-logo-light.png
+  public/admin-icons/wbx-*.png                               app icons
 Needs Pillow and the Windows Bahnschrift font.
 """
 from pathlib import Path
@@ -15,8 +15,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 PUB = ROOT / "public"
-SRC_DARK = PUB / "uploads/2026/02/logo.webp"         # original artwork (mark source)
-SRC_LIGHT = PUB / "uploads/2026/02/logo-light.webp"
+SRC_DARK = PUB / "uploads/2026/02/wbx-logo.webp"         # original artwork (mark source)
+SRC_LIGHT = PUB / "uploads/2026/02/wbx-logo-light.webp"
 MARK_CACHE = ROOT / "tools/brand-mark"               # mark cut out once, reused on reruns
 
 NAVY = (27, 38, 140, 255)      # the blue of the original wordmark
@@ -106,13 +106,13 @@ def icon(size, safe):
 
 if __name__ == "__main__":
     dark, light = logo("dark"), logo("light")
-    dark.save(PUB / "uploads/2026/02/logo.webp", quality=92)
-    light.save(PUB / "uploads/2026/02/logo-light.webp", quality=92)
-    dark.save(PUB / "wp-content/themes/carryon/assets/img/logo.png", optimize=True)
-    light.save(PUB / "wp-content/themes/carryon/assets/img/logo-light.png", optimize=True)
+    dark.save(PUB / "uploads/2026/02/wbx-logo.webp", quality=92)
+    light.save(PUB / "uploads/2026/02/wbx-logo-light.webp", quality=92)
+    dark.save(PUB / "wp-content/themes/carryon/assets/img/wbx-logo.png", optimize=True)
+    light.save(PUB / "wp-content/themes/carryon/assets/img/wbx-logo-light.png", optimize=True)
     icons = PUB / "admin-icons"
-    icon(512, 0.86).save(icons / "icon-512.png", optimize=True)
-    icon(192, 0.86).save(icons / "icon-192.png", optimize=True)
-    icon(180, 0.86).save(icons / "apple-touch-icon.png", optimize=True)
-    icon(512, 0.66).save(icons / "icon-maskable-512.png", optimize=True)
+    icon(512, 0.86).save(icons / "wbx-icon-512.png", optimize=True)
+    icon(192, 0.86).save(icons / "wbx-icon-192.png", optimize=True)
+    icon(180, 0.86).save(icons / "wbx-apple-touch-icon.png", optimize=True)
+    icon(512, 0.66).save(icons / "wbx-icon-maskable-512.png", optimize=True)
     print("logo files written")

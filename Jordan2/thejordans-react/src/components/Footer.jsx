@@ -37,7 +37,7 @@ export default function Footer() {
                   >
                     <div className="elementor-widget-container">
                       <div className="pxl-logo " data-wow-delay="ms">
-                        <img loading="lazy" decoding="async" src="/uploads/2026/02/logo-light.webp" className="attachment-full" alt="" />
+                        <img loading="lazy" decoding="async" src="/uploads/2026/02/wbx-logo-light.webp" className="attachment-full" alt="" />
                       </div>
                     </div>
                   </div>

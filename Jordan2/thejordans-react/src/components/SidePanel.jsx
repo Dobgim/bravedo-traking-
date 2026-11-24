@@ -28,7 +28,7 @@ export default function SidePanel() {
                   <div className="elementor-widget-container">
                     <div className="pxl-logo " data-wow-delay="ms">
                       <a href="">
-                        <img src="/uploads/2026/02/logo.webp" className="attachment-full" alt="" />
+                        <img src="/uploads/2026/02/wbx-logo.webp" className="attachment-full" alt="" />
                       </a>
                     </div>
                   </div>
