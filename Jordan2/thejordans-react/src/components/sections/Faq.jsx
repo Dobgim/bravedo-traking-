@@ -1,0 +1,100 @@
+export default function Faq() {
+  return (
+    <div
+      className="elementor-element elementor-element-5656133 e-flex e-con-boxed pxl-row-scroll-none pxl-column-none pxl-full-content-with-space-none pxl-container-line-none pxl-container-video-background-none pxl-none overflow-visible e-con e-parent "
+      data-id="5656133"
+      data-element_type="container"
+      data-e-type="container"
+    >
+      <div className="e-con-inner">
+        <div
+          className="elementor-element elementor-element-cbc7055 elementor-widget__width-initial elementor-widget-tablet_extra__width-initial elementor-widget-tablet__width-initial pxl-none overflow-visible elementor-widget elementor-widget-pxl_button"
+          data-id="cbc7055"
+          data-element_type="widget"
+          data-e-type="widget"
+          data-widget_type="pxl_button.default"
+        >
+          <div className="elementor-widget-container">
+            <div id="pxl-pxl_button-cbc7055-4343" className="pxl-button pxl-atc-link " data-wow-delay="ms">
+              <a
+                href="faqs/"
+                className="btn  full-space-between  style-icon-2  pxl-icon--right"
+                data-wow-delay="ms"
+                data-target=".pxl-page-popup-template-0"
+              >
+                <span className="ic-box-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12" fill="none">
+                    <path
+                      d="M13.7519 6.60731L8.7128 11.7486C8.55502 11.9096 8.34103 12 8.1179 12C7.89477 12 7.68078 11.9096 7.523 11.7486C7.36523 11.5876 7.27659 11.3693 7.27659 11.1416C7.27659 10.914 7.36523 10.6957 7.523 10.5347L11.1281 6.85795H0.839855C0.617112 6.85795 0.403491 6.76767 0.245988 6.60698C0.0884845 6.44628 0 6.22833 0 6.00107C0 5.77381 0.0884845 5.55586 0.245988 5.39516C0.403491 5.23447 0.617112 5.14419 0.839855 5.14419H11.1281L7.5244 1.46532C7.36663 1.30435 7.27799 1.08602 7.27799 0.858366C7.27799 0.630713 7.36663 0.412384 7.5244 0.251409C7.68218 0.0904346 7.89617 2.39871e-09 8.1193 0C8.34243 -2.39871e-09 8.55642 0.0904346 8.7142 0.251409L13.7533 5.39269C13.8316 5.4724 13.8937 5.56711 13.9361 5.67139C13.9784 5.77566 14.0001 5.88743 14 6.0003C13.9999 6.11316 13.9779 6.22488 13.9353 6.32905C13.8927 6.43322 13.8304 6.52779 13.7519 6.60731Z"
+                      fill="#11194E"
+                    ></path>
+                  </svg>
+                </span>
+                {" "}
+                <span className="pxl--btn-text" data-text="Frequently Asked Questions">{" Frequently Asked Questions "}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          className="elementor-element elementor-element-98fa87c elementor-widget__width-initial elementor-widget-tablet_extra__width-initial elementor-widget-tablet__width-initial pxl-none overflow-visible elementor-widget elementor-widget-pxl_button"
+          data-id="98fa87c"
+          data-element_type="widget"
+          data-e-type="widget"
+          data-widget_type="pxl_button.default"
+        >
+          <div className="elementor-widget-container">
+            <div id="pxl-pxl_button-98fa87c-2748" className="pxl-button pxl-atc-link " data-wow-delay="ms">
+              <a
+                href="contact-us/"
+                className="btn  full-space-between  style-icon-2  pxl-icon--right"
+                data-wow-delay="ms"
+                data-target=".pxl-page-popup-template-0"
+              >
+                <span className="ic-box-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12" fill="none">
+                    <path
+                      d="M13.7519 6.60731L8.7128 11.7486C8.55502 11.9096 8.34103 12 8.1179 12C7.89477 12 7.68078 11.9096 7.523 11.7486C7.36523 11.5876 7.27659 11.3693 7.27659 11.1416C7.27659 10.914 7.36523 10.6957 7.523 10.5347L11.1281 6.85795H0.839855C0.617112 6.85795 0.403491 6.76767 0.245988 6.60698C0.0884845 6.44628 0 6.22833 0 6.00107C0 5.77381 0.0884845 5.55586 0.245988 5.39516C0.403491 5.23447 0.617112 5.14419 0.839855 5.14419H11.1281L7.5244 1.46532C7.36663 1.30435 7.27799 1.08602 7.27799 0.858366C7.27799 0.630713 7.36663 0.412384 7.5244 0.251409C7.68218 0.0904346 7.89617 2.39871e-09 8.1193 0C8.34243 -2.39871e-09 8.55642 0.0904346 8.7142 0.251409L13.7533 5.39269C13.8316 5.4724 13.8937 5.56711 13.9361 5.67139C13.9784 5.77566 14.0001 5.88743 14 6.0003C13.9999 6.11316 13.9779 6.22488 13.9353 6.32905C13.8927 6.43322 13.8304 6.52779 13.7519 6.60731Z"
+                      fill="#11194E"
+                    ></path>
+                  </svg>
+                </span>
+                {" "}
+                <span className="pxl--btn-text" data-text="Ask TheJordans Logistic">{" Ask TheJordans Logistic "}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          className="elementor-element elementor-element-f465a54 elementor-widget__width-initial elementor-widget-tablet_extra__width-initial elementor-widget-tablet__width-initial pxl-none overflow-visible elementor-widget elementor-widget-pxl_button"
+          data-id="f465a54"
+          data-element_type="widget"
+          data-e-type="widget"
+          data-widget_type="pxl_button.default"
+        >
+          <div className="elementor-widget-container">
+            <div id="pxl-pxl_button-f465a54-2122" className="pxl-button pxl-atc-link " data-wow-delay="ms">
+              <a
+                href="garage/"
+                className="btn  full-space-between  style-icon-2  pxl-icon--right"
+                data-wow-delay="ms"
+                data-target=".pxl-page-popup-template-0"
+              >
+                <span className="ic-box-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12" fill="none">
+                    <path
+                      d="M13.7519 6.60731L8.7128 11.7486C8.55502 11.9096 8.34103 12 8.1179 12C7.89477 12 7.68078 11.9096 7.523 11.7486C7.36523 11.5876 7.27659 11.3693 7.27659 11.1416C7.27659 10.914 7.36523 10.6957 7.523 10.5347L11.1281 6.85795H0.839855C0.617112 6.85795 0.403491 6.76767 0.245988 6.60698C0.0884845 6.44628 0 6.22833 0 6.00107C0 5.77381 0.0884845 5.55586 0.245988 5.39516C0.403491 5.23447 0.617112 5.14419 0.839855 5.14419H11.1281L7.5244 1.46532C7.36663 1.30435 7.27799 1.08602 7.27799 0.858366C7.27799 0.630713 7.36663 0.412384 7.5244 0.251409C7.68218 0.0904346 7.89617 2.39871e-09 8.1193 0C8.34243 -2.39871e-09 8.55642 0.0904346 8.7142 0.251409L13.7533 5.39269C13.8316 5.4724 13.8937 5.56711 13.9361 5.67139C13.9784 5.77566 14.0001 5.88743 14 6.0003C13.9999 6.11316 13.9779 6.22488 13.9353 6.32905C13.8927 6.43322 13.8304 6.52779 13.7519 6.60731Z"
+                      fill="#11194E"
+                    ></path>
+                  </svg>
+                </span>
+                {" "}
+                <span className="pxl--btn-text" data-text="How Our Delivery Works">{" How Our Delivery Works "}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,102 @@
+# TheJordans — Logistics & Freight (React + Tailwind)
+
+A clean React 18 + Tailwind CSS v4 rebuild of the TheJordans website, with a
+live shipment-tracking page and the admin dashboard. Supabase provides the
+database and authentication. Configure the project URL and publishable key in
+the local `.env.local` file and in the deployment environment.
+
+| URL | Page |
+|---|---|
+| `/` | Home |
+| `/about` | About Us |
+| `/services` | Services |
+| `/news` and `/news/:slug` | News list and article pages |
+| `/track?code=TJ-2026-K7QX4M9` | Tracking: status, live map, progress, history |
+| `/contact` | Contact details, quote form, FAQ, office map |
+| `/admin` | Admin dashboard (Supabase Auth login) |
+
+Every page has its own URL (React Router); links switch pages without a reload.
+The layout is responsive from 320px phones up to wide desktops.
+
+## Going live on your own domain
+
+The website can be built and deployed as static files. Configure
+`VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in the deployment environment
+and apply the SQL migrations in `supabase/migrations/`.
+
+**Shared hosting (Hostinger, cPanel, Namecheap…)**
+1. Upload the **contents** of the `dist/` folder into `public_html/`
+   (it includes `.htaccess`, which makes page URLs like `/track` and `/admin` work;
+   show hidden files if you don't see it).
+2. Open `https://your-domain/admin` and sign in.
+
+**Vercel / Netlify** — import this folder; build command `npm run build`,
+output `dist`. (`vercel.json` is included.)
+
+**After going live**
+- Admin → Settings: fill in the company name, phone, email and address
+  (shown on invoices and the tracking page) and **change the admin password**.
+- Google Cloud → Credentials: restrict the Maps API key to your domain.
+
+## Rebuild after editing
+
+```bash
+npm install
+npm run dev     # http://localhost:5290
+npm run build   # production build in dist/
+```
+
+The local Supabase settings are in the ignored `.env.local` file. For a new
+checkout, copy `.env.example` to `.env.local` and fill in the project URL and
+publishable key. Apply all SQL migrations in `supabase/migrations/` to the
+project before using tracking or admin data.
+
+## Google Maps key
+
+The live map uses the key saved in **Admin → Settings** (stored in the
+database). `VITE_GOOGLE_MAPS_API_KEY` in `.env.local` is only an optional
+fallback for development.
+
+## Tracking numbers & movement
+
+- Tracking numbers are generated automatically, e.g. `TJ-2026-K7QX4M9`.
+- The package moves on the map only while it is **In Transit** or **Out for
+  Delivery**: road 60 km/h, rail 80, sea 30, air 750 (editable per shipment).
+- **On Hold** (or any other status) freezes it exactly where it is; the
+  distance covered is never lost and never goes back to the origin.
+- The tracking page shows a live percentage and distance covered, updating
+  several times a second.
+
+## Structure
+
+- `src/data/site.jsx` — all text, links and images (edit content here)
+- `src/sections/` — home page sections
+- `src/components/` — header, footer, overlays, floating widgets, shared UI
+- `src/pages/Pages.jsx` — Home, About, Services, News, Article, Contact, 404
+- `src/pages/TrackPage.jsx` — the tracking page
+- `src/lib/` — Supabase calls, map loader, package-movement maths
+- `src/admin/` — admin dashboard (own entry `admin.html`, own stylesheet)
+- `supabase/migrations/` — database schema
+
+## Email notifications
+
+When a shipment is created, and every time its status changes, the sender and
+the receiver get an email (if their email addresses are filled in) with the
+status, route and a "Track your shipment live" button. Each shipment's admin
+page lists what was sent under **Email notifications**.
+
+When a receiver saves delivery instructions on the tracking page, the current
+instruction is saved with the shipment and the company email in Admin → Settings
+is notified. Admins can see the saved instruction in the shipment record.
+For shipments on hold, set **Amount due for clearance** in the admin shipment
+form; the tracking page shows the amount and a contact-support button.
+
+How it works: a database trigger (`supabase/migrations/*_email_notifications.sql`)
+calls the `notify-shipment` Edge Function (`supabase/functions/`), which sends
+through the hosting mailbox `support@thejordanslogistics.com` over SMTP (SSL, port 465).
+
+To switch it on, create that mailbox in cPanel → Email Accounts, then in
+Supabase → Edge Functions → Secrets add `SMTP_PASS` = the mailbox password.
+(`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER` and `NOTIFY_WEBHOOK_SECRET` are already set.)
+Apply new SQL files in `supabase/migrations/` to the Supabase project and deploy
+the updated `notify-shipment` Edge Function for these additions to work online.

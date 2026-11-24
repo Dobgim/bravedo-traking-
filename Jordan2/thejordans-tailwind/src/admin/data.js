@@ -1,0 +1,332 @@
+/* All dashboard reads and writes go through here (Supabase, protected by RLS). */
+import { supabase } from '../lib/supabase.js';
+
+function database() {
+  if (!supabase) throw new Error('The database connection is not configured yet.');
+  return supabase;
+}
+
+function friendlyError(error) {
+  const msg = error?.message || 'Something went wrong.';
+  if (error?.code === '23505' && msg.includes('tracking_number')) return new Error('Another shipment already uses this tracking number.');
+  if (error?.code === '23514' && msg.includes('tracking_number')) {
+    return new Error('The tracking number may only use letters, numbers and dashes (4–40 characters).');
+  }
+  if (error?.code === '23514') return new Error('Some details are missing or invalid. Please check the required fields.');
+  if (error?.code === 'PGRST116') return new Error('Not found, or you no longer have access.');
+  if (/JWT|not authenticated|invalid claim/i.test(msg)) return new Error('Your session has expired. Please sign in again.');
+  if (/Failed to fetch|NetworkError|Load failed/i.test(msg)) return new Error('Cannot reach the database. Check your internet connection.');
+  return new Error(msg);
+}
+
+const must = ({ data, error }) => {
+  if (error) throw friendlyError(error);
+  return data;
+};
+
+const numOrNull = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
+
+/* ---------------- shipments ---------------- */
+export const fromRow = (r) => ({
+  id: r.id,
+  trackingNumber: r.tracking_number,
+  invoiceNumber: r.invoice_number,
+  status: r.status,
+  origin: r.origin,
+  destination: r.destination,
+  originLat: numOrNull(r.origin_lat),
+  originLng: numOrNull(r.origin_lng),
+  destLat: numOrNull(r.dest_lat),
+  destLng: numOrNull(r.dest_lng),
+  routePolyline: r.route_polyline,
+  routeDistanceKm: numOrNull(r.route_distance_km),
+  freightType: r.freight_type,
+  service: r.service,
+  weight: r.weight,
+  dimensions: r.dimensions,
+  estimatedDelivery: r.estimated_delivery,
+  estimatedDeliveryTime: r.estimated_delivery_time || '',
+  pieceType: r.piece_type || '',
+  packageDescription: r.package_description || '',
+  amountDue: numOrNull(r.amount_due),
+  deliveryInstruction: r.delivery_instruction || '',
+  deliveryInstructionNote: r.delivery_instruction_note || '',
+  departureAt: r.departure_at,
+  speedKmh: numOrNull(r.speed_kmh),
+  progressKm: numOrNull(r.progress_km),
+  progressAt: r.progress_at,
+  sender: r.sender || {},
+  receiver: r.receiver || {},
+  notes: r.notes || '',
+  invoice: r.invoice || {},
+  createdAt: r.created_at,
+  updatedAt: r.updated_at,
+  events: (r.shipment_events || [])
+    .map((e) => ({
+      id: e.id,
+      date: e.date,
+      status: e.status,
+      location: e.location,
+      note: e.note,
+      createdAt: e.created_at,
+      hasPhoto: Array.isArray(e.event_photos) ? e.event_photos.length > 0 : !!e.event_photos,
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date) || b.createdAt.localeCompare(a.createdAt)),
+});
+
+// progress_km / progress_at are deliberately absent: the database maintains them
+const toRow = (s) => ({
+  tracking_number: s.trackingNumber || '',
+  status: s.status,
+  origin: s.origin.trim(),
+  destination: s.destination.trim(),
+  origin_lat: numOrNull(s.originLat),
+  origin_lng: numOrNull(s.originLng),
+  dest_lat: numOrNull(s.destLat),
+  dest_lng: numOrNull(s.destLng),
+  route_polyline: s.routePolyline || null,
+  route_distance_km: numOrNull(s.routeDistanceKm),
+  freight_type: s.freightType,
+  service: s.service || '',
+  weight: s.weight || '',
+  dimensions: s.dimensions || '',
+  estimated_delivery: s.estimatedDelivery || null,
+  departure_at: s.departureAt || null,
+  estimated_delivery_time: s.estimatedDeliveryTime || '',
+  piece_type: s.pieceType || '',
+  package_description: (s.packageDescription || '').trim(),
+  amount_due: numOrNull(s.amountDue),
+  speed_kmh: numOrNull(s.speedKmh) || 60,
+  sender: s.sender || {},
+  receiver: s.receiver || {},
+  notes: s.notes || '',
+  invoice: s.invoice || {},
+});
+
+export async function listShipments() {
+  return must(await database().from('shipments').select('*').order('updated_at', { ascending: false })).map(fromRow);
+}
+
+export async function getShipment(id) {
+  return fromRow(must(await database().from('shipments').select('*, shipment_events(*, event_photos(event_id))').eq('id', id).single()));
+}
+
+export async function createShipment(s) {
+  const row = must(await database().from('shipments').insert(toRow(s)).select('id').single());
+  return getShipment(row.id);
+}
+
+export async function updateShipment(id, s) {
+  must(await database().from('shipments').update(toRow(s)).eq('id', id).select('id').single());
+  return getShipment(id);
+}
+
+export async function deleteShipment(id) {
+  must(await database().from('shipments').delete().eq('id', id));
+}
+
+export async function addEvent(shipmentId, event) {
+  const row = must(
+    await database()
+      .from('shipment_events')
+      .insert({
+        shipment_id: shipmentId,
+        status: event.status,
+        location: event.location || '',
+        note: event.note || '',
+        date: event.date,
+      })
+      .select('id')
+      .single()
+  );
+  if (event.photo) must(await database().from('event_photos').upsert({ event_id: row.id, data: event.photo }));
+  return getShipment(shipmentId);
+}
+
+/* ---------------- delivery photos (one per tracking update) ---------------- */
+export async function setEventPhoto(shipmentId, eventId, dataUrl) {
+  must(await database().from('event_photos').upsert({ event_id: eventId, data: dataUrl }));
+  return getShipment(shipmentId);
+}
+
+export async function removeEventPhoto(shipmentId, eventId) {
+  must(await supabase.from('event_photos').delete().eq('event_id', eventId));
+  return getShipment(shipmentId);
+}
+
+export async function getEventPhoto(eventId) {
+  return must(await database().from('event_photos').select('data').eq('event_id', eventId).single()).data;
+}
+
+/** Shrinks a picked image to a JPEG data URL (max 1600px) so it stores and loads fast. */
+export function imageToDataUrl(file, maxSide = 1600, quality = 0.82) {
+  return new Promise((resolve, reject) => {
+    if (!file || !file.type.startsWith('image/')) return reject(new Error('Please choose an image file (JPG, PNG, HEIC…).'));
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.naturalWidth * scale);
+      canvas.height = Math.round(img.naturalHeight * scale);
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('This image could not be read. Try a JPG or PNG photo.'));
+    };
+    img.src = url;
+  });
+}
+
+export async function deleteEvent(shipmentId, eventId) {
+  must(await database().from('shipment_events').delete().eq('id', eventId));
+  return getShipment(shipmentId);
+}
+
+/* ---------------- overview ---------------- */
+const STATUSES = ['Label Created', 'Facility Received', 'Delayed', 'In Transit', 'Out for Delivery', 'Delivered', 'On Hold', 'Cancelled'];
+
+export async function getStats() {
+  const [shipments, quotes, subscribers] = await Promise.all([
+    database().from('shipments').select('id, tracking_number, status, origin, destination, updated_at').order('updated_at', { ascending: false }),
+    database().from('quotes').select('id, name, email, origin, destination, status, created_at').order('created_at', { ascending: false }),
+    database().from('subscribers').select('id', { count: 'exact', head: true }),
+  ]);
+  const ships = must(shipments);
+  const qs = must(quotes);
+  if (subscribers.error) throw friendlyError(subscribers.error);
+
+  const byStatus = Object.fromEntries(STATUSES.map((s) => [s, 0]));
+  ships.forEach((s) => (byStatus[s.status] = (byStatus[s.status] || 0) + 1));
+  return {
+    totals: {
+      shipments: ships.length,
+      active: byStatus['Facility Received'] + byStatus['In Transit'] + byStatus['Out for Delivery'],
+      delivered: byStatus.Delivered,
+      quotes: qs.length,
+      newQuotes: qs.filter((q) => q.status === 'new').length,
+      subscribers: subscribers.count || 0,
+    },
+    byStatus,
+    recentShipments: ships.slice(0, 6).map((r) => ({
+      id: r.id,
+      trackingNumber: r.tracking_number,
+      status: r.status,
+      origin: r.origin,
+      destination: r.destination,
+      updatedAt: r.updated_at,
+    })),
+    recentQuotes: qs.slice(0, 5).map(quoteFromRow),
+  };
+}
+
+/* ---------------- quotes / subscribers ---------------- */
+const quoteFromRow = (r) => ({
+  id: r.id,
+  name: r.name,
+  email: r.email,
+  phone: r.phone,
+  dimensions: r.dimensions,
+  freightType: r.freight_type,
+  incoterms: r.incoterms,
+  origin: r.origin,
+  destination: r.destination,
+  service: r.service,
+  status: r.status,
+  createdAt: r.created_at,
+});
+
+export async function listQuotes() {
+  return must(await database().from('quotes').select('*').order('created_at', { ascending: false })).map(quoteFromRow);
+}
+
+export async function setQuoteStatus(id, status) {
+  must(await database().from('quotes').update({ status, updated_at: new Date().toISOString() }).eq('id', id));
+}
+
+export async function deleteQuote(id) {
+  must(await database().from('quotes').delete().eq('id', id));
+}
+
+export async function listSubscribers() {
+  return must(await database().from('subscribers').select('*').order('created_at', { ascending: false })).map((r) => ({
+    id: r.id,
+    email: r.email,
+    createdAt: r.created_at,
+  }));
+}
+
+export async function deleteSubscriber(id) {
+  must(await database().from('subscribers').delete().eq('id', id));
+}
+
+/* ---------------- settings / admins ---------------- */
+let settingsCache = null;
+
+/** The settings row (snake_case, as stored). Cached for the session. */
+export async function getSettings({ fresh = false } = {}) {
+  if (!settingsCache || fresh) {
+    settingsCache = must(await database().from('settings').select('*').eq('id', 1).single());
+  }
+  return settingsCache;
+}
+
+export async function saveSettings(fields) {
+  settingsCache = must(
+    await database()
+      .from('settings')
+      .update({ ...fields, updated_at: new Date().toISOString() })
+      .eq('id', 1)
+      .select('*')
+      .single()
+  );
+  return settingsCache;
+}
+
+export async function listAdmins() {
+  return must(await database().from('admins').select('*').order('created_at', { ascending: true }));
+}
+
+export async function grantAdmin(email) {
+  return must(await database().rpc('grant_admin', { p_email: email }));
+}
+
+export async function removeAdmin(userId) {
+  must(await database().from('admins').delete().eq('user_id', userId));
+}
+
+/** Confirms the current password, then sets a new one. */
+export async function changePassword(email, currentPassword, newPassword) {
+  const check = await database().auth.signInWithPassword({ email, password: currentPassword });
+  if (check.error) throw new Error('Your current password is incorrect.');
+  const { error } = await database().auth.updateUser({ password: newPassword });
+  if (error) throw friendlyError(error);
+}
+
+/* ---------------- email notifications ---------------- */
+export async function listEmailLog(shipmentId) {
+  return must(
+    await database().from('email_log').select('*').eq('shipment_id', shipmentId).order('created_at', { ascending: false }).limit(20)
+  ).map((r) => ({ id: r.id, recipient: r.recipient, subject: r.subject, kind: r.kind, ok: r.ok, error: r.error, createdAt: r.created_at }));
+}
+
+/** Sends one up-to-date email to every sender/receiver whose last email failed. */
+export async function resendFailedEmails(shipmentId) {
+  const { data, error } = await database().functions.invoke('notify-shipment', { body: { type: 'resend', shipment_id: shipmentId } });
+  if (error) {
+    let msg = error.message;
+    try {
+      msg = (await error.context.json()).error || msg;
+    } catch {
+      /* not a JSON error body */
+    }
+    throw friendlyError({ message: msg });
+  }
+  return data;
+}

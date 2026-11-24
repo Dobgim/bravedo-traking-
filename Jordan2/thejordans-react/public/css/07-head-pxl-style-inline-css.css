@@ -1,0 +1,6 @@
+
+:root{--primary-color: #FE000B;--secondary-color: #11194E;--third-color: #5C677B;--fourth-color: #142487;--body_bg-color: #ffffff;--primary-color-rgb: 254,0,11;--secondary-color-rgb: 17,25,78;--third-color-rgb: 92,103,123;--fourth-color-rgb: 20,36,135;--body_bg-color-rgb: 255,255,255;--gradient-color-from: #FE000B;--gradient-color-to: #142487;}
+        @media screen and (min-width: 1201px) {
+        #pxl-header-elementor .px-header--left_sidebar { border-color: ; }#pxl-header-elementor .px-header--left_sidebar { border-top-width: ; }#pxl-header-elementor .px-header--left_sidebar { border-right-width: ; }#pxl-header-elementor .px-header--left_sidebar { border-bottom-width: ; }#pxl-header-elementor .px-header--left_sidebar { border-left-width: ; }#pxl-header-elementor .px-header--left_sidebar { border-style: solid; }        }
+
+/*# sourceURL=pxl-style-inline-css */

@@ -1,0 +1,73 @@
+/*
+ * Responsive fixes on top of the original theme (hand-written - not regenerated).
+ * Loaded after every theme stylesheet, so equal-specificity rules win.
+ */
+
+/* Never let anything push the page sideways. `clip` (unlike `hidden`) does not
+   create a scroll container, so the sticky header keeps working. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* Media never wider than its column */
+#pxl-main img,
+#pxl-main video,
+#pxl-main iframe {
+  max-width: 100%;
+}
+
+/* Long words / URLs wrap instead of overflowing on narrow screens */
+#pxl-main h1,
+#pxl-main h2,
+#pxl-main h3,
+#pxl-main h4,
+#pxl-main p {
+  overflow-wrap: break-word;
+}
+
+/* "Delivery Flexibility" cards: the photo covers the text and slides away on
+   mouse hover. Touch screens cannot hover, so there (and on phones) the photo
+   becomes a banner across the top and the text is always visible. The long
+   selector outranks the page's own `!important` padding rule. */
+@media (hover: none), (max-width: 767px) {
+  body .elementor-18 .elementor-element.elementor-widget-pxl_icon_box .pxl-icon-box.pxl-icon-box3 .pxl-item--inner {
+    padding-top: 222px !important;
+  }
+  body .elementor-18 .elementor-element.elementor-widget-pxl_icon_box .pxl-icon-box.pxl-icon-box3 .pxl-item--bgr,
+  body .elementor-18 .elementor-element.elementor-widget-pxl_icon_box .pxl-icon-box.pxl-icon-box3:hover .pxl-item--bgr {
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 190px !important;
+    transition: none !important;
+  }
+  body .elementor-18 .elementor-element.elementor-widget-pxl_icon_box .pxl-icon-box.pxl-icon-box3 .pxl-item--bgr .bgr {
+    width: 100% !important;
+    height: 100% !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+}
+
+/* Floating "Track & Help" button: compact icon badge on phones so it covers
+   as little content as possible (its label stays for screen readers). */
+@media (max-width: 575px) {
+  #alx-contact-btn {
+    bottom: 14px !important;
+    right: 12px !important;
+  }
+  #alx-contact-btn .alxw-btn-core {
+    gap: 0;
+    padding: 11px 18px 11px 15px;
+  }
+  #alx-contact-btn .alxw-btn-core > div {
+    display: none;
+  }
+  #alx-contact-btn .alxw-truck {
+    width: 24px;
+    height: 24px;
+  }
+}
