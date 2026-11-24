@@ -266,6 +266,15 @@ export default function Header() {
                                     <span className="pxl-item-menu-icon pxl-hide"></span>
                                   </a>
                                 </li>
+                                <li id="menu-item-policies" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-policies">
+                                  <a href="/policies">
+                                    <span className="pxl-menu-item-text">
+                                      Policies
+                                      <i className="caseicon-angle-arrow-down pxl-hide"></i>
+                                    </span>
+                                    <span className="pxl-item-menu-icon pxl-hide"></span>
+                                  </a>
+                                </li>
                               </ul>
                             </div>
                           </div>
@@ -821,6 +830,15 @@ export default function Header() {
                                     <span className="pxl-item-menu-icon pxl-hide"></span>
                                   </a>
                                 </li>
+                                <li id="menu-item-policies" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-policies">
+                                  <a href="/policies">
+                                    <span className="pxl-menu-item-text">
+                                      Policies
+                                      <i className="caseicon-angle-arrow-down pxl-hide"></i>
+                                    </span>
+                                    <span className="pxl-item-menu-icon pxl-hide"></span>
+                                  </a>
+                                </li>
                               </ul>
                             </div>
                           </div>
@@ -1344,6 +1362,11 @@ export default function Header() {
                       <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-8281">
                         <a href="/contact">
                           <span>Contact Us</span>
+                        </a>
+                      </li>
+                      <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-policies">
+                        <a href="/policies">
+                          <span>Policies</span>
                         </a>
                       </li>
                       <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-account">

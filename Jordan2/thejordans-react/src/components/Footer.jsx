@@ -448,7 +448,7 @@ export default function Footer() {
                       <div className="pxl-text-editor underline ">
                         <div className="pxl-item--inner  " data-wow-delay="ms">
                           <p>
-                            <a href="#">Terms &amp; Conditions</a>
+                            <a href="/policies">Terms &amp; Conditions</a>
                           </p>
                         </div>
                       </div>
@@ -524,7 +524,7 @@ export default function Footer() {
                       <div className="pxl-text-editor underline ">
                         <div className="pxl-item--inner  " data-wow-delay="ms">
                           <p>
-                            <a href="#">Return and Refund Policy</a>
+                            <a href="/policies#shipping-fees-refund">Return and Refund Policy</a>
                           </p>
                         </div>
                       </div>

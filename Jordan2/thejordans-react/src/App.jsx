@@ -9,7 +9,7 @@ import CartSidebar from './components/CartSidebar.jsx';
 import WishlistPopup from './components/WishlistPopup.jsx';
 import ContactWidget from './components/ContactWidget.jsx';
 import SiteForms from './components/SiteForms.jsx';
-import { AboutPage, ContactPage, NewsDetailPage, NewsPage, NotFoundPage, ServicesPage, SitemapPage } from './components/Pages.jsx';
+import { AboutPage, ContactPage, NewsDetailPage, NewsPage, NotFoundPage, PoliciesPage, ServicesPage, SitemapPage } from './components/Pages.jsx';
 import { AccountPage, ForgotPasswordPage, ResetPasswordPage, SignInPage, SignUpPage } from './components/AuthPages.jsx';
 import { customerAuth } from './lib/customerAuth.js';
 import useLegacyScripts from './useLegacyScripts.js';
@@ -32,6 +32,7 @@ function route() {
   const post = path.match(/^\/news\/([a-z0-9-]+)$/);
   if (post) return { key: '/news', page: <NewsDetailPage slug={post[1]} /> };
   if (path === '/contact') return { key: '/contact', page: <ContactPage /> };
+  if (path === '/policies') return { key: '/policies', page: <PoliciesPage /> };
   if (path === '/sitemap') return { key: '', page: <SitemapPage /> };
   if (path === '/login') return { key: '', page: <SignInPage /> };
   if (path === '/signup') return { key: '', page: <SignUpPage /> };

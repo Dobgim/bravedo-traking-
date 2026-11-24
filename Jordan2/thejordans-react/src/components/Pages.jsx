@@ -14,6 +14,7 @@ import Industries from './sections/Industries.jsx';
 import DeliveryFlexibility from './sections/DeliveryFlexibility.jsx';
 import RequestQuote from './sections/RequestQuote.jsx';
 import { POSTS, findPost, formatPostDate } from '../data/posts.js';
+import { POLICIES } from '../data/policies.js';
 import { getPublicSettings } from '../lib/publicApi.js';
 import './trackPage.css';
 import './pages.css';
@@ -416,6 +417,89 @@ export function ContactPage() {
   );
 }
 
+function PolicyBlock({ b }) {
+  if (b.ol)
+    return (
+      <ol className="tjp-policy__ol">
+        {b.ol.map(([title, text]) => (
+          <li key={title}>
+            <strong>{title}</strong>
+            {text && <span>{text}</span>}
+          </li>
+        ))}
+      </ol>
+    );
+  if (b.ul)
+    return (
+      <ul className="tjp-policy__ul">
+        {b.ul.map((t) => (
+          <li key={t}>{t}</li>
+        ))}
+      </ul>
+    );
+  return <p className={b.strong ? 'tjp-policy__strong' : undefined}>{b.p}</p>;
+}
+
+export function PoliciesPage() {
+  usePageMeta('Policies', `${SITE} shipping fees, refund and pet crate rental policies.`);
+  const [active, setActive] = useState(POLICIES[0].id);
+
+  // highlight the policy being read in the menu
+  useEffect(() => {
+    const els = POLICIES.map((p) => document.getElementById(p.id)).filter(Boolean);
+    if (!els.length || typeof IntersectionObserver === 'undefined') return undefined;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: '-30% 0px -60% 0px' }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div id="pxl-main">
+      <PageHero title="Our Policies" crumb="Policies" lede="Clear terms on shipping fees, refunds and pet transport — so you always know what to expect." />
+      <section className="tjp tjp-wrap tjp-wrap--tint">
+        <div className="tjp-container tjp-policies">
+          <nav className="tjp-policies__menu" aria-label="Policies">
+            <p className="tjp-eyebrow">Policy menu</p>
+            {POLICIES.map((p) => (
+              <a key={p.id} href={`#${p.id}`} className={active === p.id ? 'is-active' : undefined} onClick={() => setActive(p.id)}>
+                {p.short}
+              </a>
+            ))}
+            <div className="tjp-policies__help">
+              <strong>Questions about a charge or refund?</strong>
+              <span>Our customer service team is happy to help.</span>
+              <a href="tel:+19045676548">+1 (904) 567-6548</a>
+              <a href="mailto:support@worldbridgexpress.com">support@worldbridgexpress.com</a>
+            </div>
+          </nav>
+
+          <div className="tjp-policies__body">
+            {POLICIES.map((p) => (
+              <article key={p.id} id={p.id} className="tjp-policy">
+                <span className="tjp-policy__notice">{p.notice}</span>
+                <h2>{p.title}</h2>
+                <p className="tjp-policy__intro">{p.intro}</p>
+                {p.sections.map((sec) => (
+                  <section key={sec.title} className="tjp-policy__section">
+                    <h3>{sec.title}</h3>
+                    {sec.blocks.map((b, i) => (
+                      <PolicyBlock key={i} b={b} />
+                    ))}
+                  </section>
+                ))}
+              </article>
+            ))}
+            <p className="tjp-policies__updated">These policies apply to all shipments handled by {SITE}. Last updated {new Date().getFullYear()}.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 export const SITEMAP = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About Us' },
@@ -423,6 +507,10 @@ export const SITEMAP = [
   { href: '/news', label: 'News & Insights' },
   { href: '/track', label: 'Track a Shipment' },
   { href: '/contact', label: 'Contact Us' },
+  { href: '/policies', label: 'Our Policies' },
+  ...POLICIES.map((p) => ({ href: `/policies#${p.id}`, label: p.title })),
+  { href: '/signup', label: 'Create an Account' },
+  { href: '/login', label: 'Sign In' },
   ...POSTS.map((p) => ({ href: `/news/${p.slug}`, label: p.title })),
 ];
 
